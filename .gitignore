@@ -1,4 +1,4 @@
-.env
+/movieMinder/.env
 .env.local
 .env.*.local
 
