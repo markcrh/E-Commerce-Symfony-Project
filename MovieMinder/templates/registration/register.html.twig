@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+
+	<div class="min-h-screen bg-gray-100 flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
+		<div class="max-w-sm w-full bg-white rounded-lg shadow-lg p-8">
+
+			<h1 class="text-3xl font-semibold text-center text-gray-800 mb-6">Register</h1>
+
+
+			{% if registrationForm.vars.errors|length > 0 %}
+				<div class="text-red-600 bg-red-100 border border-red-400 p-2 rounded-md mb-4">
+					{{ form_errors(registrationForm) }}
+				</div>
+			{% endif %}
+
+
+			{{ form_start(registrationForm) }}
+
+			<div class="mb-4">
+				{{ form_row(registrationForm.email, {
+            'attr': {
+              'class': 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
+            }
+          }) }}
+			</div>
+
+
+			<div class="mb-4">
+
+				{{ form_row(registrationForm.plainPassword, {
+            label: 'Password',
+            'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'}
+          
+        }) }}
+
+			</div>
+
+			<div class="mb-4">
+				{{ form_row(registrationForm.agreeTerms) }}
+			</div>
+			<button type="submit" class="w-full py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Register</button>
+
+
+			{{ form_end(registrationForm) }}
+
+		</div>
+	</div>
+{% endblock %}

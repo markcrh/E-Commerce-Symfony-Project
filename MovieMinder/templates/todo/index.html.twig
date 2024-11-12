@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Todo index{% endblock %}
+
+{% block body %}
+    <h1>Todo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Assign</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for todo in todos %}
+            <tr>
+                <td>{{ todo.id }}</td>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.description }}</td>
+                <td>{{ todo.owner }}</td>
+                <td>{{ todo.assign }}</td>
+                <td>{{ todo.status ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_todo_show', {'id': todo.id}) }}">show</a>
+                    <a href="{{ path('app_todo_edit', {'id': todo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_todo_new') }}">Create new</a>
+{% endblock %}
