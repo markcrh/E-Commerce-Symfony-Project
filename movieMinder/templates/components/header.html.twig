@@ -1,27 +1,27 @@
 <header>
-	<nav class="bg-black w-full z-20 top-0 start-0 ">
+	<nav class="bg-transparent w-full z-20 top-0 start-0 ">
 		<div class="w-full flex flex-wrap items-center justify-between mx-auto p-4">
 			<a href={{path('app_home')}} class="flex items-center space-x-3 rtl:space-x-reverse">
 
-				<img src="{{ asset('img/logoMovieMinder.svg') }}"  class="h-16" alt="MovieMinder Logo">
+				<img src="{{ asset('img/logoMovieMinder.svg') }}"  class="h-12" alt="MovieMinder Logo">
 			</a>
 
 
 			<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 text-white" id="navbar-sticky">
 				<ul class="flex flex-col p-4 md:p-0 mt-4 items-center font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
 					<li>
-						<a href={{path('app_home')}} class=" text-2xl block py-2 px-3 text-white rounded md:bg-transparent md:text-orange-500 md:p-0" aria-current="page">HOME</a>
+						<a href={{path('app_home')}} class=" text-xl block py-2 px-3 text-white rounded md:bg-transparent md:text-orange-500 md:p-0" aria-current="page">HOME</a>
 					</li>
 					<li>
-						<a href="#" class="block text-2xl py-2 px-3 text-white-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0">ABOUT</a>
+						<a href="#" class="block text-xl py-2 px-3 text-white-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0">ABOUT</a>
 					</li>
 					<li>
-						<a href="#" class="block text-2xl py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0">CONTACT</a>
+						<a href="#" class="block text-xl py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0">CONTACT</a>
 					</li>
 					<li>
 						<a href="{{path('app_login')}}">
 
-							<button type="button" class="text-white bg-orange-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-2xl px-4 py-2 text-center">LOGIN</button>
+							<button type="button" class="text-white bg-orange-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-2xl text-xl px-4 py-2 text-center">LOGIN</button>
 						</a>
 					</li>
 				</ul>
