@@ -22,6 +22,22 @@ class MovieController extends AbstractController
         ]);
     }
 
+    #[Route('/add/{id}', name: 'add_movie_user', methods: ['GET', 'POST'])]
+    public function addMovieUser(int $id, EntityManagerInterface $em): Response
+    {
+
+        $user = $this->getUser();
+        $myMovies = $user->getMoviesId();
+        if (!is_array($myMovies)) {
+            $myMovies = [];
+        }
+        array_push($myMovies, $id);
+        $user->setMoviesId($myMovies);
+        $em->flush();
+        //dd($myMovies);
+        return $this->render('dashboard/dashboard.html.twig');
+    }
+
     #[Route('/new', name: 'app_movie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -78,4 +94,6 @@ class MovieController extends AbstractController
 
         return $this->redirectToRoute('app_movie_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }

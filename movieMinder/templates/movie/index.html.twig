@@ -45,6 +45,9 @@
                 <td>
                     <a href="{{ path('app_movie_show', {'id': movie.id}) }}">show</a>
                     <a href="{{ path('app_movie_edit', {'id': movie.id}) }}">edit</a>
+                    <a href="{{ path('add_movie_user', {'id': movie.id}) }}">Add</a>
+
+
                 </td>
             </tr>
         {% else %}
@@ -52,6 +55,7 @@
                 <td colspan="12">no records found</td>
             </tr>
         {% endfor %}
+        
         </tbody>
     </table>
 
