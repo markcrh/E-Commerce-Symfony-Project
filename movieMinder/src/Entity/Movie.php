@@ -42,7 +42,7 @@ class Movie
     private ?string $platforms = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $status = null;
+    private ?bool $watched = false;
 
     public function getId(): ?int
     {
@@ -157,14 +157,14 @@ class Movie
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getwatched(): ?string
     {
-        return $this->status;
+        return $this->watched;
     }
 
-    public function setStatus(string $status): static
+    public function setwatched(bool $watched): static
     {
-        $this->status = $status;
+        $this->watched = $watched;
 
         return $this;
     }
