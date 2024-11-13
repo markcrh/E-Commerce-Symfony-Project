@@ -3,36 +3,29 @@
 {% block title %}Hello HomeController!
 {% endblock %}
 
+
+
 {% block body %}
-<header>
-	<nav class="bg-black fixed w-full z-20 top-0 start-0 ">
-		<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-			<a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-				<img src="{{ asset('img/logoMovieMinder.svg') }}" class="h-8" alt="Flowbite Logo">
-			</a>
 
-			
-			<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 text-white" id="navbar-sticky">
-				<ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-black">
-					<li>
-						<a href="#" class="block py-2 px-3 text-white rounded md:bg-transparent md:text-orange-500 md:p-0" aria-current="page">HOME</a>
-					</li>
-					<li>
-						<a href="#" class="block py-2 px-3 text-white-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0">ABOUT</a>
-					</li>
-					<li>
-						<a href="#" class="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0">CONTACT</a>
-					</li>
-                    <li>
-<button type="button" class="text-white bg-orange-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center">LOGIN</button>
+<div class="flex flex-col flex-grow">
 
-                    </li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-</header>
+{% block header %}
+{% include 'components/header.html.twig' %}
+{% endblock %}
 
 
-	<div class="example-wrapper"></div>
+<div class="flex flex-col justify-center text-center w-full h-auto mt-[10%] gap-4">
+<h1 class="text-orange-500 text-3xl ">NEVER FORGET WHAT YOU'VE SEEN</h1>
+<h2 class="text-white text-2xl">Remember every episode, every movie and stay on top of your viewing habits</h2>
+</div>
+
+</div>
+
+
+
+
+{% block footer %}
+{% include 'components/footer.html.twig' %}
+{% endblock %}
+
 {% endblock %}

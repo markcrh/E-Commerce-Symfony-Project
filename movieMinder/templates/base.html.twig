@@ -14,7 +14,16 @@
             {{ importmap() }}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="min-h-screen flex flex-col" >
+        {% block body %}
+        
+{% block header %}
+{% endblock %}
+
+{% block main %}
+{% endblock %}
+
+{% endblock %}
+
     </body>
 </html>
