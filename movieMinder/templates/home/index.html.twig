@@ -4,28 +4,28 @@
 {% endblock %}
 
 
-
 {% block body %}
 
-<div class="flex flex-col flex-grow">
+	<main class="flex flex-col flex-grow">
 
-{% block header %}
-{% include 'components/header.html.twig' %}
-{% endblock %}
-
-
-<div class="flex flex-col justify-center text-center w-full h-auto mt-[10%] gap-4">
-<h1 class="text-orange-500 text-3xl ">NEVER FORGET WHAT YOU'VE SEEN</h1>
-<h2 class="text-white text-2xl">Remember every episode, every movie and stay on top of your viewing habits</h2>
-</div>
-
-</div>
+		{% block header %}
+			{% include 'components/header.html.twig' %}
+		{% endblock %}
 
 
+		<div class="flex flex-col justify-center text-center w-full h-auto mt-[10%] gap-4">
+			<h1 class="text-orange-500 text-3xl ">NEVER FORGET WHAT YOU'VE SEEN</h1>
+			<h2 class="text-white text-2xl">Remember every episode, every movie and stay on top of your viewing habits</h2>
+			<a href="{{path('app_register')}}">
+				<h2 class="text-white text-2xl">REGISTER NOW</h2>
+			</a>
+		</div>
+
+	</main>
 
 
-{% block footer %}
-{% include 'components/footer.html.twig' %}
-{% endblock %}
+	{% block footer %}
+		{% include 'components/footer.html.twig' %}
+	{% endblock %}
 
 {% endblock %}
