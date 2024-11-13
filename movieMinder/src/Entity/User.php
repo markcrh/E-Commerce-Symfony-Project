@@ -37,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $series_id = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $movies_id = null;
+    private ?array $movies_id = [];
 
     public function getId(): ?int
     {
@@ -133,12 +133,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getMoviesId(): ?int
+    public function getMoviesId(): ?array
     {
         return $this->movies_id;
     }
 
-    public function setMoviesId(?int $movies_id): static
+    public function setMoviesId(?array $movies_id): self
     {
         $this->movies_id = $movies_id;
 

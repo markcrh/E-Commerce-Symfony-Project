@@ -84,4 +84,12 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+    
+    #[Route('/{id}/movie_list', name:'movie_list', methods: ['GET'])]
+
+    public function getList(Request $request, User $user): Response 
+    {
+        
+    }
 }
+
