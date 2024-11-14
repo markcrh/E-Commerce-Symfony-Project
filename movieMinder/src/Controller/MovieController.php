@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Movie;
 use App\Form\MovieType;
 use App\Repository\MovieRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,25 +18,31 @@ class MovieController extends AbstractController
     #[Route('/', name: 'app_movie_index', methods: ['GET'])]
     public function index(MovieRepository $movieRepository): Response
     {
+        $user = $this->getUser();
+        $movieList = $user->getMoviesId();
+
         return $this->render('movie/index.html.twig', [
             'movies' => $movieRepository->findAll(),
+            'user' => $user,
+            'movieList' => $movieList
         ]);
     }
 
     #[Route('/add/{id}', name: 'add_movie_user', methods: ['GET', 'POST'])]
     public function addMovieUser(int $id, EntityManagerInterface $em): Response
     {
-
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
-        if (!is_array($myMovies)) {
-            $myMovies = [];
+        if (!in_array($id, $myMovies)) {
+            $myMovies[] = $id;
+            $user->setMoviesId($myMovies);
+            $em->flush();
+        } else {
+            unset($myMovies[array_search($id, $myMovies)]);
+            $user->setMoviesId($myMovies);
+            $em->flush();
         }
-        array_push($myMovies, $id);
-        $user->setMoviesId($myMovies);
-        $em->flush();
-        //dd($myMovies);
-        return $this->render('dashboard/dashboard.html.twig');
+        return $this->redirectToRoute('app_movie_index');
     }
 
     #[Route('/new', name: 'app_movie_new', methods: ['GET', 'POST'])]
@@ -94,6 +101,5 @@ class MovieController extends AbstractController
 
         return $this->redirectToRoute('app_movie_index', [], Response::HTTP_SEE_OTHER);
     }
-
 
 }
