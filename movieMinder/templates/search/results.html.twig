@@ -1,0 +1,12 @@
+<h1>Search Movies</h1>
+
+    <h2>Search Results</h2>
+    <ul>
+        {% for movie in movies %}
+            <li>{{ movie.title}}</li>
+            <li>{{ movie.year}}</li>
+            <li>{{ movie.synopsis}}</li>
+        {% else %}
+            <li>No movies found</li>
+        {% endfor %}
+    </ul>
