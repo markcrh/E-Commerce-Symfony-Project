@@ -18,12 +18,13 @@
             <h1 class="text-orange-500 text-5xl font-extrabold">NEVER FORGET WHAT YOU'VE SEEN</h1>
             <h2 class="text-white text-4xl">Remember every episode, every movie and stay on top of your viewing
                 habits</h2>
-            <a href="{{ path('app_register') }}">
+            <a href="{{ path('app_register_banner') }}">
                 <h2 class="text-white text-2xl">REGISTER NOW</h2>
             </a>
             <div class="flex items-center justify-between max-w-4xl mx-auto bg-white rounded-full border-2 border-gray-300 hover:border-orange-500 px-4 py-2">
                 <!-- Input Field (Symfony Form Field) -->
                 {{ form_start(form, {'action': path('app_movie_search'), 'method': 'GET'}) }}
+
                 <div class="flex w-full items-center">
                     {{ form_widget(form.title, {
                         'attr': {
@@ -31,8 +32,6 @@
                             'placeholder': 'Find a movie or series...'
                         }
                     }) }}
-
-                    <!-- Icon (Submit Button) -->
                     <button type="submit" class="ml-2 bg-transparent border-none cursor-pointer">
                         <img src="{{ asset('img/loop.svg') }}" alt="Search" width="48px" class="fill-gray-600">
                     </button>

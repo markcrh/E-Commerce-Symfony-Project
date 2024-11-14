@@ -46,4 +46,11 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
+    #[Route('/registerBanner', name: 'app_register_banner')]
+    public function registerBanner(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    {
+
+        return $this->render('registration/registerPopUp.html.twig');
+    }
 }
