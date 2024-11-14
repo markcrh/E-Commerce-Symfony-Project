@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Entity\Movie;
@@ -39,13 +40,23 @@ class HomeController extends AbstractController
             $searchTerm = $form->get('title')->getData();
 
             // Only perform the search if the search term exists
-            if ($searchTerm) {
+            if (is_string($searchTerm)) {
                 $movies = $em->getRepository(Movie::class)
                     ->createQueryBuilder('m')
-                    ->where('m.title LIKE :title')
-                    ->setParameter('title', '%' . $searchTerm . '%')
+                    ->where('m.title LIKE :title')  // Search by title
+                    ->orWhere('m.year = :year')    // Search by year (exact match)
+                    ->setParameter('title', '%' . $searchTerm . '%')  // Wildcards for title search
+                    ->setParameter('year', $searchTerm)
                     ->getQuery()
                     ->getResult();
+//            } else if (is_numeric($searchTerm)){
+//                $movies = $em->getRepository(Movie::class)
+//                    ->createQueryBuilder('m')
+//                    ->where('m.year LIKE :year')
+//                    ->setParameter('year', '%' . $searchTerm . '%')
+//                    ->getQuery()
+//                    ->getResult();
+//            }
             }
         }
 
