@@ -11,54 +11,6 @@
 
     <h1>Movie index</h1>
 
-    {#<table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Year</th>
-                <th>Duration</th>
-                <th>Synopsis</th>
-                <th>Genres_id</th>
-                <th>Poster</th>
-                <th>Trailer</th>
-                <th>Rating</th>
-                <th>Platforms</th>
-                <th>Watched</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for movie in movies %}
-            <tr>
-                <td>{{ movie.id }}</td>
-                <td>{{ movie.title }}</td>
-                <td>{{ movie.year }}</td>
-                <td>{{ movie.duration }}</td>
-                <td>{{ movie.synopsis }}</td>
-                <td>{{ movie.genresId }}</td>
-                <td>{{ movie.poster }}</td>
-                <td>{{ movie.trailer }}</td>
-                <td>{{ movie.rating }}</td>
-                <td>{{ movie.platforms }}</td>
-                <td>{{ movie.watched ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_movie_show', {'id': movie.id}) }}">show</a>
-                    <a href="{{ path('app_movie_edit', {'id': movie.id}) }}">edit</a>
-                    <a href="{{ path('add_movie_user', {'id': movie.id}) }}">Add</a>
-
-
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="12">no records found</td>
-            </tr>
-        {% endfor %}
-        
-        </tbody>
-    </table>#}
-
     <div class="flex flex-wrap justify-center flex-grow w-[85%] min-h-screen overflow-y-auto gap-5">
         {% for movie in movies %}
             <div class="flex flex-col text-white w-[200px] h-full hover:scale-110 transition-transform gap-2.5">
