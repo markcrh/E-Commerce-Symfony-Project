@@ -1,48 +1,53 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	MovieMinder
+    MovieMinder
 {% endblock %}
 
 
 {% block body %}
 
-	<main class="flex flex-col flex-grow">
+    <main class="flex flex-col flex-grow">
 
-		{% block header %}
-			{% include 'components/header.html.twig' %}
-		{% endblock %}
-
-
-		<div class="flex flex-col justify-center text-center w-full h-auto mt-[10%] gap-6">
-			<h1 class="text-orange-500 text-5xl font-extrabold">NEVER FORGET WHAT YOU'VE SEEN</h1>
-			<h2 class="text-white text-4xl">Remember every episode, every movie and stay on top of your viewing habits</h2>
-			<a href="{{path('app_register')}}">
-				<h2 class="text-white text-2xl">REGISTER NOW</h2>
-			</a>
-			<div class="flex px-8 py-2 border-2  overflow-hidden max-w-4xl mx-auto font-[sans-serif] bg-white rounded-full hover:border-orange-500">
-				<!-- Input Field -->
-				<input type="email" placeholder="Find a movie or serie..."
-					   class="rounded-full outline-none bg-transparent text-gray-600 text-2xl w-full h-12 pl-8 pr-12" />
-
-				<!-- Icon -->
-				<img src="{{ asset('img/loop.svg') }}" width="60px"
-					 class="fill-gray-600 ml-4 rotate-90">
-			</div>
+        {% block header %}
+            {% include 'components/header.html.twig' %}
+        {% endblock %}
 
 
+        <div class="flex flex-col justify-center text-center w-full h-auto mt-[10%] gap-6">
+            <h1 class="text-orange-500 text-5xl font-extrabold">NEVER FORGET WHAT YOU'VE SEEN</h1>
+            <h2 class="text-white text-4xl">Remember every episode, every movie and stay on top of your viewing
+                habits</h2>
+            <a href="{{ path('app_register_banner') }}">
+                <h2 class="text-white text-2xl">REGISTER NOW</h2>
+            </a>
+            <div class="flex items-center justify-between max-w-4xl mx-auto bg-white rounded-full border-2 border-gray-300 hover:border-orange-500 px-4 py-2">
+                <!-- Input Field (Symfony Form Field) -->
+                {{ form_start(form, {'action': path('app_movie_search'), 'method': 'GET'}) }}
+
+                <div class="flex w-full items-center">
+                    {{ form_widget(form.title, {
+                        'attr': {
+                            'class': 'w-full bg-transparent text-xl text-gray-700 placeholder-gray-400 focus:outline-none rounded-full py-2 pl-4 pr-12',
+                            'placeholder': 'Find a movie or series...'
+                        }
+                    }) }}
+                    <button type="submit" class="ml-2 bg-transparent border-none cursor-pointer">
+                        <img src="{{ asset('img/loop.svg') }}" alt="Search" width="48px" class="fill-gray-600">
+                    </button>
+                </div>
+                {{ form_end(form) }}
+            </div>
 
 
+        </div>
 
 
-
-		</div>
-
-	</main>
+    </main>
 
 
-	{% block footer %}
-		{% include 'components/footer.html.twig' %}
-	{% endblock %}
+    {% block footer %}
+        {% include 'components/footer.html.twig' %}
+    {% endblock %}
 
 {% endblock %}
