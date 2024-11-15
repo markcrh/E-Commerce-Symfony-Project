@@ -16,12 +16,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Request $request): Response
     {
-        $form = $this->createForm(MovieSearchType::class);
-        $form->handleRequest($request);
-
-        // Pass the form to the template
         return $this->render('home/index.html.twig', [
-            'form' => $form->createView(),
         ]);
     }
     #[Route('/search', name: 'app_movie_search', methods: ['GET'])]

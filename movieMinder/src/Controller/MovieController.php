@@ -65,6 +65,13 @@ class MovieController extends AbstractController
             'form' => $form,
         ]);
     }
+    #[Route('/card', name: 'app_movie_card')]
+    public function showCard(Request $request): Response
+    {
+        return $this->render('components/card.html.twig', [
+        ]);
+    }
+
 
     #[Route('/{id}', name: 'app_movie_show', methods: ['GET'])]
     public function show(Movie $movie): Response
