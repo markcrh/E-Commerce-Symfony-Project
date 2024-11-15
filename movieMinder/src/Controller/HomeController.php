@@ -24,47 +24,27 @@ class HomeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-    // Handle the search request and display results
-    #[Route('/search/', name: 'app_movie_search', methods: ['GET', 'POST'])]
+    #[Route('/search', name: 'app_movie_search', methods: ['GET'])]
     public function search(Request $request, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(MovieSearchType::class);
-        $form->handleRequest($request);
 
         $movies = [];
-        $searchTerm = '';
 
-        // Handle form submission
-        if ($form->isSubmitted() && $form->isValid()) {
-            $searchTerm = $form->get('title')->getData();
-
-            // Only perform the search if the search term exists
+            $searchTerm = $request->get('search');
             if (is_string($searchTerm)) {
                 $movies = $em->getRepository(Movie::class)
                     ->createQueryBuilder('m')
-                    ->where('m.title LIKE :title')  // Search by title
-                    ->orWhere('m.year = :year')    // Search by year (exact match)
-                    ->setParameter('title', '%' . $searchTerm . '%')  // Wildcards for title search
+                    ->where('m.title LIKE :title')
+                    ->orWhere('m.year = :year')
+                    ->setParameter('title', '%' . $searchTerm . '%') 
                     ->setParameter('year', $searchTerm)
                     ->getQuery()
                     ->getResult();
-//            } else if (is_numeric($searchTerm)){
-//                $movies = $em->getRepository(Movie::class)
-//                    ->createQueryBuilder('m')
-//                    ->where('m.year LIKE :year')
-//                    ->setParameter('year', '%' . $searchTerm . '%')
-//                    ->getQuery()
-//                    ->getResult();
-//            }z
             }
-        }
 
-        // Pass the form and the movie results to the template
         return $this->render('search/results.html.twig', [
-            'form' => $form->createView(),
-            'movies' => $movies,  // Pass the search results
-            'searchTerm' => $searchTerm,  // Optionally pass the search term for display
+            'movies' => $movies,
+            'searchTerm' => $searchTerm,
         ]);
     }
 }
