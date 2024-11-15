@@ -1,12 +1,51 @@
-<h1>Search Movies</h1>
+{% extends 'base.html.twig' %}
 
-    <h2>Search Results</h2>
-    <ul>
-        {% for movie in movies %}
-            <li>{{ movie.title}}</li>
-            <li>{{ movie.year}}</li>
-            <li>{{ movie.synopsis}}</li>
-        {% else %}
-            <li>No movies found</li>
-        {% endfor %}
-    </ul>
+{% block title %}Hello HomeController!
+{% endblock %}
+
+
+{% block body %}
+    {% block header %}
+        {% include 'components/headerUser.html.twig' %}
+    {% endblock %}
+    <div class="flex flex-col p-16 gap-20">
+        <div class="flex items-center justify-between w-3/5 mx-auto bg-white rounded-full border-2 border-gray-300 hover:border-orange-500 px-4 py-1">
+            <form action="/search" method="GET" class="flex w-full items-center">
+                <input type="text" name="search" placeholder="Find a movie or serie..."
+                       class="w-full bg-transparent text-xl text-gray-700 placeholder-gray-400 focus:outline-none rounded-full py-2 pl-4 pr-12">
+                <button type="submit" class="ml-2 bg-transparent border-none cursor-pointer">
+                    <img src="{{ asset('img/loop.svg') }}" alt="Search" width="48px" class="fill-gray-600">
+                </button>
+            </form>
+        </div>
+
+
+    <h2 class="font-bold text-3xl text-gray-300">SEARCH RESULTS for <span class="text-white">"{{ searchTerm }}"</span></h2>
+    <main class="flex flex-col items-center flex-grow">
+        <div class="flex flex-wrap justify-center flex-grow w-[100%] gap-6 ml-16">
+            {% for movie in movies %}
+                <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
+                    <div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
+                        <img class="aspect-square w-[35px] mt-[5px] group-hover:hidden" src="/img/check-mark.svg"
+                             alt="add to list">
+                        <a href="{{ path('add_movie_user', {'id': movie.id}) }}">
+                            <img class="aspect-square w-[25px] hidden group-hover:block" src="/img/remove-mark.svg"
+                                 alt="add to list">
+                        </a>
+                    </div>
+                    <img class="rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500 bg-cover"
+                         src="{{ movie.poster }}" alt="{{ movie.title }} ">
+                    <span class="text-center font-bold group-hover:text-orange-500"> {{ movie.title }} </span>
+                </div>
+            {% endfor %}
+        </div>
+
+    </main>
+</div>
+    {% block footer %}
+        {% include 'components/footer.html.twig' %}
+    {% endblock %}
+
+    {% endblock %}
+
+
