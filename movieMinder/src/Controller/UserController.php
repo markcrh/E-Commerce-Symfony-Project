@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\MovieRepository;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -23,9 +24,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/dashboard', name: 'user_dashboard', methods: ['GET'])]
-    public function userDashboard(UserRepository $userRepository): Response
+    public function userDashboard( UserRepository $userRepository, MovieRepository $movieRepository): Response
     {
-        return $this->render('dashboard/dashboard.html.twig');
+        $user = $this->getUser();
+        $myMovies = $user->getMoviesId();
+        $movies = $movieRepository->findBy(['id' => $myMovies]);
+        return $this->render('dashboard/dashboard.html.twig', [
+            'movies' => $movies
+        ]);
     }
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
@@ -86,10 +92,20 @@ class UserController extends AbstractController
     }
     
 
+    // #[Route('/mymovies', name:'show_list', methods: ['GET'])]
+    // public function getList(Request $request, User $user, UserRepository $userRepository): Response 
+    // {
+    //     $myMovies = $user->getMoviesId();
 
-//     public function getList(Request $request, User $user): Response 
-//     {
+    //     // $movieIds = $user->getMoviesId();
+    //     // dd($movieIds);
+    //     // $movies = $movieRepository->findBy(['id' => $movieIds]);
+    //     // dd($movies);
 
-//     }
+    //     return $this->render('dashboard/dashboard.html.twig', [
+    //         'myMovies' => $myMovies
+    //     ]);
+            
+    // }
 }
 
