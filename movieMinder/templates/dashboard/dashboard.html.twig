@@ -11,30 +11,46 @@
 		{% block header %}
 			{% include 'components/headerUser.html.twig' %}
 		{% endblock %}
-
+		<main class="flex flex-col items-center flex-grow">
 
 		<div class="flex flex-col justify-center text-center w-full h-auto mt-[10%] gap-4">
 			<h1 class="text-orange-500 text-3xl ">USER DASHBOARD</h1>
 			<h2 class="text-white text-2xl">Remember every episode, every movie and stay on top of your viewing habits</h2>
 
-			<div>
-				<h2 class="text-black text-2xl">MY MOVIES</h2>
+				<h2 class="text-black text-2xl text-orange-500">MY MOVIES</h2>
 
-<div class="flex flex-wrap justify-center flex-grow w-[85%] min-h-screen overflow-y-auto gap-5">
+<div class="flex flex-wrap justify-center flex-grow w-[85%] gap-5">
+
 	{% for movie in movies %}
-		<div class="flex flex-col text-white w-[200px] h-full hover:scale-110 transition-transform gap-2.5">
-			<img class="w-[200px]" src="{{ movie.poster }}" alt="{{ movie.title }} ">
-			<span class="text-center font-bold">
-				{{ movie.title }}</span>
-			
 
-		</div>
+		{% if movie.id in watchedMovies %}
+			<div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
+				<div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
+					<img class="aspect-square w-[30px] mt-[5px] group-hover:hidden" src="/img/watched-mark.svg" alt="add to list">
+					<a href="{{ path('app_user_add_watched', {'movieId': movie.id}) }}">
+						<img class="aspect-square w-[30px] hidden group-hover:block" src="/img/not-watched-mark.svg" alt="add to list">
+					</a>
+				</div>
+				<img class="rounded-md w-[200px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
+				<span class="text-center font-bold group-hover:text-orange-500"> {{ movie.title }} </span>
+			</div>
+
+		{% else %}
+			<div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
+				<div class="absolute hidden group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
+					<a href="{{ path('app_user_add_watched', {'movieId': movie.id}) }}">
+						<img class="aspect-square w-[30px]" src="/img/not-watched-mark.svg" alt="add to list">
+					</a>
+				</div>
+				<img class="rounded-md w-[200px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
+				<span class="text-center font-bold group-hover:text-orange-500"> {{ movie.title }} </span>
+			</div>
+		{%  endif %}
 	{%  endfor %}
 </div>
 
 				
 
-			</div>
 			<a href="{{path('app_movie_index')}}">
 				<h2 class="text-white text-2xl">ALL MOVIES</h2>
 
@@ -43,9 +59,8 @@
 
 		</div>
 
-	</div>
 
-
+	</main>
 	{% block footer %}
 		{% include 'components/footer.html.twig' %}
 	{% endblock %}

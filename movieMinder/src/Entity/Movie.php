@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MovieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,6 +45,15 @@ class Movie
 
     #[ORM\Column(length: 255)]
     private ?bool $watched = false;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'watched_movies')]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -157,14 +168,53 @@ class Movie
         return $this;
     }
 
-    public function getwatched(): ?string
+    public function getwatched()
     {
         return $this->watched;
     }
 
-    public function setwatched(bool $watched): static
+    public function setwatched(bool $watched)
     {
         $this->watched = $watched;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addWatchedMovie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeWatchedMovie($this);
+        }
 
         return $this;
     }

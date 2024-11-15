@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -38,6 +40,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(nullable: true)]
     private ?array $movies_id = [];
+
+    #[ORM\ManyToMany(targetEntity: Movie::class, inversedBy: 'users')]
+    private ?Collection $watched_movies;
+
+    public function __construct()
+    {
+        $this->watched_movies = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -144,4 +156,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Movie>
+     */
+
+    /**
+     * @return Collection<int, Movie>
+     */
+    public function getWatchedMovies(): Collection
+    {
+        return $this->watched_movies;
+    }
+
+    public function addWatchedMovie(Movie $watchedMovie): static
+    {
+        if (!$this->watched_movies->contains($watchedMovie)) {
+            $this->watched_movies->add($watchedMovie);
+        }
+        else {
+            $this->removeWatchedMovie($watchedMovie);
+        }
+        return $this;
+    }
+
+    public function removeWatchedMovie(Movie $watchedMovie): static
+    {
+        $this->watched_movies->removeElement($watchedMovie);
+
+        return $this;
+    }
+
 }
