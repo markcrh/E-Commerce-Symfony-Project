@@ -7,11 +7,13 @@
 {% block header %}
 	{% include 'components/headerUser.html.twig' %}
 {% endblock %}
+
 <main class="flex flex-col items-center flex-grow">
 
     <h1>Movie index</h1>
     <div class="flex flex-wrap justify-center flex-grow w-[85%] min-h-screen gap-5">
         {% for movie in movies %}
+
             {% if movie.id in movieList %}
                 <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
                     <div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
@@ -38,7 +40,7 @@
         {%  endfor %}
     </div>
 
-    <a href="{{ path('app_movie_new') }}">Create new</a>
+    {# <a href="{{ path('app_movie_new') }}">Create new</a> #}
 
     </main>
 

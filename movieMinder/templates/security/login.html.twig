@@ -27,12 +27,12 @@
 								{% endif %}
 
 								{# {% if app.user %}
-																	<div class="mb-3">
-																		You are logged in as
-																		{{ app.user.userIdentifier }},
-																		<a href="{{ path('app_logout') }}">Logout</a>
-																	</div>
-																{% endif %} #}
+																																	<div class="mb-3">
+																																		You are logged in as
+																																		{{ app.user.userIdentifier }},
+																																		<a href="{{ path('app_logout') }}">Logout</a>
+																																	</div>
+																																{% endif %} #}
 
 								<p class="text-3xl font-bold mb-4 text-white">Login</p>
 								<div class="relative mb-4" data-twe-input-wrapper-init>
@@ -50,16 +50,24 @@
 
 								<div class="mb-12 pb-1 pt-1 text-center">
 									<button class="rounded-3xl text-xl mb-3 inline-block w-full font-bold px-6 pb-2 pt-2.5 uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" type="submit" style="background: linear-gradient(to right, #ee7724, #d8363a);">
-										SIGN IN
+										LOGIN
 									</button>
 								</div>
 
 							</form>
 
 							<div class="text-center">
-                                <p class="pb-2">or</p>
-                                <p class="pb-2">Sign in with</p>
+								<p class="pb-2">or</p>
+								<p class="pb-2">Sign in with</p>
 								<img class="mx-auto w-32 mb-10" src="{{ asset('img/loginIcons.svg') }}" alt="logo"/>
+							</div>
+							<div class="flex flex-row items-center">
+								<p>Dont't you have an account?</p>
+								<a href="{{path('app_register')}}">
+									<button type="button" class="text-orange-600 rounded-3xl inline-block px-1 pb-[6px] pt-2 text-xl font-bold  active:border-danger-700 active:text-danger-700 dark:hover:bg-rose-950 dark:focus:bg-rose-950">
+										Sign up
+									</button>
+								</a>
 							</div>
 
 						</div>
@@ -67,6 +75,7 @@
 					<div class="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-e-lg lg:rounded-bl-none">
 						<img src="{{ asset('img/loginPic.svg') }}" class="h-full w-full object-cover rounded-3xl" alt="MovieMinder Logo">
 					</div>
+
 
 				</div>
 			</div>
