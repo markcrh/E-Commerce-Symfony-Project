@@ -36,7 +36,7 @@ class HomeController extends AbstractController
                     ->createQueryBuilder('m')
                     ->where('m.title LIKE :title')
                     ->orWhere('m.year = :year')
-                    ->setParameter('title', '%' . $searchTerm . '%') 
+                    ->setParameter('title', '%' . $searchTerm . '%')
                     ->setParameter('year', $searchTerm)
                     ->getQuery()
                     ->getResult();
