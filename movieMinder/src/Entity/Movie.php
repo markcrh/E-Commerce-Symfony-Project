@@ -28,8 +28,8 @@ class Movie
     #[ORM\Column(type: Types::TEXT)]
     private ?string $synopsis = null;
 
-    #[ORM\Column]
-    private ?int $genres_id = null;
+    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'genres')]
+    private ?Collection $genres;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $poster = null;
@@ -52,8 +52,8 @@ class Movie
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->genres = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -108,15 +108,16 @@ class Movie
         return $this;
     }
 
-    public function getGenresId(): ?int
+    public function getGenres(): Collection
     {
-        return $this->genres_id;
+        return $this->genres;
     }
 
-    public function setGenresId(int $genres_id): static
+    public function addGenre(Genre $genre): static
     {
-        $this->genres_id = $genres_id;
-
+        if (!$this->genres->contains($genre)) {
+            $this->genres->add($genre);
+        }
         return $this;
     }
 

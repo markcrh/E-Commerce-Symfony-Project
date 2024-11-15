@@ -49,8 +49,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->watched_movies = new ArrayCollection();
     }
 
-
-
     public function getId(): ?int
     {
         return $this->id;
