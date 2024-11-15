@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Movies
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="flex flex-col flex-grow">
+
+		{% block header %}
+			{% include 'components/headerUser.html.twig' %}
+		{% endblock %}
+
+		<div class="flex flex-col justify-center text-center w-full h-auto mt-[10%] gap-4">
+			<h1 class="text-orange-500 text-3xl pb-2">MY MOVIES</h1>
+
+			<div class="flex flex-wrap justify-center gap-5">
+
+				{% for movie in movies %}
+					<div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
+
+						<img class="rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
+						<span class="text-center font-bold group-hover:text-orange-500">
+							{{ movie.title }}
+						</span>
+
+					</div>
+
+				{% endfor %}
+			</div>
+		</div>
+		{% block footer %}
+			{% include 'components/footer.html.twig' %}
+		{% endblock %}
+
+	</div>
+{%  endblock  %}
