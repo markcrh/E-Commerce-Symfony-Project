@@ -28,7 +28,11 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
-        $movies = $movieRepository->findBy(['id' => $myMovies]);
+        $movies = $movieRepository->findBy(
+            ['id' => $myMovies],
+        null, 
+        6
+        );
         return $this->render('dashboard/dashboard.html.twig', [
             'movies' => $movies
         ]);
@@ -40,20 +44,31 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
     }
-
+    #[Route('/mymovies', name:'show_list', methods: ['GET'])]
+    public function getList(Request $request, UserRepository $userRepository, MovieRepository $movieRepository): Response 
+    {
+        $user = $this->getUser();
+        $myMovies = $user->getMoviesId();
+        $movies = $movieRepository->findBy(['id' => $myMovies]);
+        return $this->render('user/user_movie_list.html.twig', [
+            'movies' => $movies
+        ]);
+            
+    }
+    
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
@@ -92,20 +107,5 @@ class UserController extends AbstractController
     }
     
 
-    // #[Route('/mymovies', name:'show_list', methods: ['GET'])]
-    // public function getList(Request $request, User $user, UserRepository $userRepository): Response 
-    // {
-    //     $myMovies = $user->getMoviesId();
-
-    //     // $movieIds = $user->getMoviesId();
-    //     // dd($movieIds);
-    //     // $movies = $movieRepository->findBy(['id' => $movieIds]);
-    //     // dd($movies);
-
-    //     return $this->render('dashboard/dashboard.html.twig', [
-    //         'myMovies' => $myMovies
-    //     ]);
-            
-    // }
 }
 

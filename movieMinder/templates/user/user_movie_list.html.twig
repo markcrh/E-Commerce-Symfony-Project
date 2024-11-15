@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Movies
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="flex flex-col flex-grow">
+
+		{% block header %}
+			{% include 'components/headerUser.html.twig' %}
+		{% endblock %}
+
+		<div class="flex flex-col justify-center text-center w-full h-auto mt-[10%] gap-4">
+			<h1 class="text-orange-500 text-3xl ">MY MOVIES</h1>
+
+			<div>
+
+				<div class="flex flex-wrap justify-center flex-grow w-[85%] min-h-screen overflow-y-auto gap-5">
+					{% for movie in movies %}
+						<div class="flex flex-col text-white w-[200px] h-full hover:scale-110 transition-transform gap-2.5">
+							<img class="w-[200px]" src="{{ movie.poster }}" alt="{{ movie.title }} ">
+							<span class="text-center font-bold">
+								{{ movie.title }}</span>
+
+
+						</div>
+					{%  endfor %}
+				</div>
+
+
+				<a href="{{path('app_movie_index')}}">
+					<h2 class="text-white text-2xl">ALL MOVIES</h2>
+
+
+				</a>
+			</div>
+
+
+			{% block footer %}
+				{% include 'components/footer.html.twig' %}
+			{% endblock %}
+
+
+		{%  endblock  %}
