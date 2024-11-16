@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Genre;
 use App\Entity\Movie;
 use App\Form\MovieType;
 use App\Repository\MovieRepository;
@@ -17,15 +18,22 @@ use App\Form\MovieSearchType;
 class MovieController extends AbstractController
 {
     #[Route('/', name: 'app_movie_index', methods: ['GET'])]
-    public function index(MovieRepository $movieRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         $movieList = $user->getMoviesId();
+        $movies = $entityManager->getRepository(Movie::class)->findAll();
+        foreach ($movies as $movie) {
+            $movieGenres = $movie->getGenres();
+            foreach ($movieGenres as $genre) {
+                $movie->genresName[] = $genre->getName();
+            }
+        }
 
         return $this->render('movie/index.html.twig', [
-            'movies' => $movieRepository->findAll(),
+            'movies' => $entityManager->getRepository(Movie::class)->findAll(),
             'user' => $user,
-            'movieList' => $movieList
+            'movieList' => $movieList,
         ]);
     }
 

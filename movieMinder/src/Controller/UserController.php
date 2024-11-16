@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Movie;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -24,13 +25,20 @@ class UserController extends AbstractController
     }
 
     #[Route('/dashboard', name: 'user_dashboard', methods: ['GET'])]
-    public function userDashboard( UserRepository $userRepository, MovieRepository $movieRepository): Response
+    public function userDashboard( EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
-        $movies = $movieRepository->findBy(['id' => $myMovies]);
+
+        $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null, 6);
+        $watched = $user->getWatchedMovies();
+        $watchedMovies = $watched->map( function (Movie $movie) {
+            return $movie->getId();
+        })->toArray();
+
         return $this->render('dashboard/dashboard.html.twig', [
-            'movies' => $movies
+            'movies' => $movies,
+            'watchedMovies' => $watchedMovies
         ]);
     }
 
@@ -40,20 +48,31 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
     }
-
+    #[Route('/mymovies', name:'show_list', methods: ['GET'])]
+    public function getList(Request $request, UserRepository $userRepository, MovieRepository $movieRepository): Response 
+    {
+        $user = $this->getUser();
+        $myMovies = $user->getMoviesId();
+        $movies = $movieRepository->findBy(['id' => $myMovies]);
+        return $this->render('user/user_movie_list.html.twig', [
+            'movies' => $movies
+        ]);
+            
+    }
+    
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
@@ -90,22 +109,18 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/watched/{movieId}', name: 'app_user_add_watched', methods: ['GET','POST'])]
+    public function addWatchedMovie(EntityManagerInterface $entityManager, $movieId): Response
+    {
+        $movie = $entityManager->getRepository(Movie::class)->find($movieId);
+        $user = $this->getUser();
+        $user->addWatchedMovie($movie);
+        $entityManager->persist($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('user_dashboard', [], Response::HTTP_SEE_OTHER);
+    }
     
 
-    // #[Route('/mymovies', name:'show_list', methods: ['GET'])]
-    // public function getList(Request $request, User $user, UserRepository $userRepository): Response 
-    // {
-    //     $myMovies = $user->getMoviesId();
-
-    //     // $movieIds = $user->getMoviesId();
-    //     // dd($movieIds);
-    //     // $movies = $movieRepository->findBy(['id' => $movieIds]);
-    //     // dd($movies);
-
-    //     return $this->render('dashboard/dashboard.html.twig', [
-    //         'myMovies' => $myMovies
-    //     ]);
-            
-    // }
 }
 
