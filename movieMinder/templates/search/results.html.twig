@@ -42,8 +42,8 @@
     </div>
 
     {% for movie in movies %}
-        <div id="popup-{{ movie.id }}" class="hidden -mt-[60vh] flex flex-wrap items-center justify-center text-neutral-800 mb-[4%] z-10 popup">
-            <div class="max-w-[55%] w-full">
+        <div id="popup-{{ movie.id }}" class="hidden -mt-[67vh] flex flex-wrap items-center justify-center text-neutral-800 mb-[4%] z-10 popup">
+            <div class="max-w-[50%] w-full">
                 <div class="block rounded-3xl shadow-lg bg-neutral-800">
                     <div class="g-0 lg:flex lg:flex-wrap">
                         <div class="px-4 md:px-0 lg:w-7/12 lg:order-last">
@@ -54,7 +54,7 @@
                                     </button>
                                 </div>
                                 <div>
-                                    <p class="text-4xl font-bold text-left mt-10 mb-8 text-gray-200">{{ movie.title }}</p>
+                                    <p class="text-4xl font-bold text-left mt-6 mb-8 text-gray-200">{{ movie.title }}</p>
                                     <div class="flex flex-row text-white text-2xl gap-12 mb-4">
                                         <h3><b>{{ movie.year }} </b></h3>
                                         <h3><b>{{ movie.duration }} min </b></h3>
@@ -64,7 +64,7 @@
                                     </div>
 
                                     <div class="relative mb-4">
-                                        <p class="text-white text-2xl mb-8">{{ movie.synopsis }}</p>
+                                        <p class="text-white text-xl mb-8">{{ movie.synopsis }}</p>
                                         <div class="mb-2 pb-1 pt-1 text-center">
                                             <a href="{{ path('app_register') }}">
                                                 <button
