@@ -62,17 +62,20 @@ class UserController extends AbstractController
         ]);
     }
     #[Route('/mymovies', name:'show_list', methods: ['GET'])]
-    public function getList(Request $request, UserRepository $userRepository, MovieRepository $movieRepository): Response 
+    public function getList(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, MovieRepository $movieRepository): Response
     {
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
-        $movies = $movieRepository->findBy(['id' => $myMovies]);
+        $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null, 6);
+        $watched = $user->getWatchedMovies();
+        $watchedMovies = $watched->map( function (Movie $movie) {
+            return $movie->getId();
+        })->toArray();
         return $this->render('user/user_movie_list.html.twig', [
-            'movies' => $movies
+            'movies' => $movies,
+            'watchedMovies' => $watchedMovies
         ]);
-            
     }
-
     #[Route('/profile', name: 'app_user_profile', methods: ['GET'])]
     public function profile(UserRepository $userRepository, MovieRepository $movieRepository): Response
     {
