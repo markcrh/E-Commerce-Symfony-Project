@@ -1,24 +1,34 @@
 <header>
-	<nav class="bg-transparent w-full z-20 top-0 start-0">
-		<div class="w-full flex flex-wrap items-center justify-between mx-auto p-4">
-			<a href="{{ path('app_home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-				<img src="{{ asset('img/logoMovieMinder.svg') }}" class="h-12" alt="MovieMinder Logo">
-			</a>
+	<nav class="bg-transparent w-full z-20 top-0 start-0 mt-2">
+		<div class="w-full flex items-center justify-between mx-auto p-4">
 
+			<a href="{{ path('app_home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+				<img src="{{ asset('img/logoMovieMinder.svg') }}" class="h-12 ml-2 -mt-[4px]" alt="MovieMinder Logo">
+			</a>
+			
+			<div class="flex items-center mx-auto gap-4 hover:border-orange-500">
+				<form action="/search" method="GET" class="flex w-full bg-white rounded-full border-2 border-gray-300 hover:border-orange-500">
+					<input type="text" name="search" placeholder="Find a movie or series and add it to your list..."
+						   class="w-full bg-white text-xl text-gray-700 placeholder-gray-400 focus:outline-none rounded-l-full py-2 pl-4 pr-12">
+
+					<button type="submit" class="bg-transparent border-none cursor-pointer rounded-r-full p-1">
+						<img src="{{ asset('img/loop.svg') }}" alt="Search" width="40px" class="fill-gray-600">
+					</button>
+				</form>
+			</div>
 			<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 text-white" id="navbar-sticky">
 				<ul class="flex flex-col p-4 md:p-0 mt-4 items-center font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
 					<li>
-						<a href="{{path('app_movie_index')}}">
-							<h2 class="text-white text-2xl">ALL MOVIES</h2>
-
-
+						<a href="{{ path('app_movie_index') }}">
+							<button type="button" class="flex items-center gap-1 text-white bg-orange-500 hover:text-2xl focus:ring-4 focus:outline-none focus:ring-blue-300 font-extrabold rounded-2xl text-xl px-4 py-2 text-center">
+								ALL MOVIES
+							</button>
 						</a>
-
 					</li>
 					<li>
 						<a href="{{ path('user_dashboard') }}" class="text-xl block py-2 px-3 rounded md:bg-transparent
-																					                                  {{ app.request.attributes.get('_route') == 'user_dashboard' ? 'text-orange-500' : 'text-white hover:text-orange-500' }}
-																					                                  md:p-0" aria-current="{{ app.request.attributes.get('_route') == 'user_dashboard' ? 'page' : '' }}">MY LISTS</a>
+                                                                        {{ app.request.attributes.get('_route') == 'user_dashboard' ? 'text-orange-500' : 'text-white hover:text-orange-500' }}"
+						   aria-current="{{ app.request.attributes.get('_route') == 'user_dashboard' ? 'page' : '' }}">MY LISTS</a>
 					</li>
 					<li>
 						<a href="#" class="block text-xl py-2 px-3 rounded text-white hover:text-orange-500 md:p-0">
@@ -27,37 +37,33 @@
 					</li>
 					<li>
 						<a href="{{ path('show_list') }}" class="block text-xl py-2 px-3 rounded text-white hover:text-orange-500 md:p-0
-														{{ app.request.attributes.get('_route') == 'show_list' ? 'text-orange-500' : 'text-white hover:text-orange-500' }}" aria-current="{{ app.request.attributes.get('_route') == 'show_list' ? 'page' : '' }}">MY MOVIES</a>
-
+                                                            {{ app.request.attributes.get('_route') == 'show_list' ? 'text-orange-500' : 'text-white hover:text-orange-500' }}"
+						   aria-current="{{ app.request.attributes.get('_route') == 'show_list' ? 'page' : '' }}">MY MOVIES</a>
 					</li>
-<li
-	class="relative">
-	
-	<button id="user-btn" type="button" class="flex items-center gap-1 text-black bg-orange-500 hover:text-2xl focus:ring-4 focus:outline-none focus:ring-blue-300 font-extrabold rounded-2xl text-xl px-4 py-2 text-center">
-		<img src="{{ asset('img/POP.svg') }}" class="h-8" alt="User Icon">
-		{{ app.user.username }}
-	</button>
+					<li class="relative">
+						<button id="user-btn" type="button" class="flex items-center">
+							<img src="{{ asset('img/userCircle1.svg') }}" class="h-10 mr-4" alt="User Icon">
+						</button>
 
-	
-	<div id="user-dropdown" class="absolute right-0 mt-2 w-48 bg-white text-black shadow-lg rounded-lg hidden">
-		<ul class="py-2">
-			<li>
-				<a href="{{ path('app_logout') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">
-					Logout
-				</a>
-			</li>
-		</ul>
-	</div>
-</li>
+						<div id="user-dropdown" class="absolute right-0 mt-2 w-40 text-lg bg-white opacity-90 text-black shadow-lg rounded-lg hidden">
+							<ul class="py-2 ">
+								<li>
+									<a href="{{ path('app_logout') }}" class="block px-4 py-2 text-m hover:bg-gray-100">
+										My profile
+										<br>
+										Logout
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
 
-<script>
-	document.getElementById('user-btn').addEventListener('click', function () {
-var dropdown = document.getElementById('user-dropdown');
-dropdown.classList.toggle('hidden');
-});
-</script>
-
-
+					<script>
+						document.getElementById('user-btn').addEventListener('click', function () {
+							var dropdown = document.getElementById('user-dropdown');
+							dropdown.classList.toggle('hidden');
+						});
+					</script>
 				</ul>
 			</div>
 		</div>

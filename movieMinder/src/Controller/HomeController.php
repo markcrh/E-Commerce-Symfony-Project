@@ -9,13 +9,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class HomeController extends AbstractController
 {
     // Show the homepage with the search form
     #[Route('/', name: 'app_home')]
-    public function index(Request $request): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $movies = $entityManager->getRepository(Movie::class)->findBy([], null, 6);
         return $this->render('home/index.html.twig', [
+            'movies' => $movies,
         ]);
     }
     #[Route('/search', name: 'app_movie_search', methods: ['GET'])]
