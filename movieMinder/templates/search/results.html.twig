@@ -42,7 +42,7 @@
     </div>
 
     {% for movie in movies %}
-        <div id="popup-{{ movie.id }}" class="hidden -mt-[72vh] flex flex-wrap items-center justify-center text-neutral-800 mb-[4%] z-10 popup">
+        <div id="popup-{{ movie.id }}" class="hidden fixed inset-0 flex items-center justify-center z-50 popup">
             <div class="max-w-[50%] w-full">
                 <div class="block rounded-3xl shadow-lg bg-neutral-800">
                     <div class="g-0 lg:flex lg:flex-wrap">
