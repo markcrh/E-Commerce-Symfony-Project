@@ -17,11 +17,17 @@
 
                 <h2 class="text-5xl text-white font-extrabold">MY LISTS</h2>
                 <h2 class="text-3xl text-gray-400 font-extrabold">MY MOVIES</h2>
-
+                {% if movies is empty %}
+                <div class="flex flex-col justify-center items-center gap-6">
+                    <h2 class="text-white text-2xl font-bold text-center">Your list is empty</h2>
+                    <a href="{{ path('app_movie_index') }}" class="flex flew row items-center text-white font-extrabold rounded-2xl text-2xl px-4 py-2 text-center gap-4 border-2 border-orange-500">
+                        <h3>ADD MOVIES</h3>
+                        <img class="aspect-square w-[30px] group-hover:hidden"
+                             src="/img/addIcon.png" alt="add to list">
+                    </a>
+                {% else %}
                 <div class="flex flex-wrap justify-center flex-grow w-full gap-5">
-
                     {% for movie in movies %}
-                        {% if movie.id in watchedMovies %}
                             <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
                                 <div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
                                     <img class="aspect-square w-[30px] mt-[5px] group-hover:hidden"
@@ -35,27 +41,16 @@
                                      src="{{ movie.poster }}" alt="{{ movie.title }} ">
                                 <span class="text-center font-bold group-hover:text-orange-500"> {{ movie.title }} </span>
                             </div>
-
-                        {% else %}
-                            <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
-                                <div class="absolute hidden group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
-                                    <a href="{{ path('app_user_add_watched', {'movieId': movie.id}) }}">
-                                        <img class="aspect-square w-[30px]" src="/img/not-watched-mark.svg"
-                                             alt="add to list">
-                                    </a>
-                                </div>
-                                <img class="rounded-md w-[200px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500"
-                                     src="{{ movie.poster }}" alt="{{ movie.title }} ">
-                                <span class="text-center font-bold group-hover:text-orange-500"> {{ movie.title }} </span>
-                            </div>
-                        {% endif %}
                     {% endfor %}
+                    {% endif %}
+                </div>
+            <h2 class="text-3xl text-gray-400 mt-6 font-extrabold">MY SERIES</h2>
                 </div>
 
-
             </div>
+
             {% for movie in movies %}
-                <div id="popup-{{ movie.id }}" class="hidden -mt-[42vh] flex flex-wrap items-center justify-center text-neutral-800 mb-[4%] z-10 popup">
+                <div id="popup-{{ movie.id }}" class="hidden -mt-[72vh] flex flex-wrap items-center justify-center text-neutral-800 mb-[4%] z-10 popup">
                     <div class="max-w-[50%] w-full">
                         <div class="block rounded-3xl shadow-lg bg-neutral-800">
                             <div class="g-0 lg:flex lg:flex-wrap">

@@ -16,7 +16,7 @@
             <h2 class="text-5xl text-white font-extrabold mb-10">MY MOVIES</h2>
 
             <h2 class="text-3xl text-gray-400 font-extrabold">PENDING</h2>
-            {% if watchedMovies is empty %}
+            {% if movies is empty %}
             <div class="flex flex-col justify-center items-center gap-6">
                 <h2 class="text-white text-2xl font-bold text-center">Your list is empty</h2>
                 <a href="{{ path('app_movie_index') }}" class="flex flew row items-center text-white font-extrabold rounded-2xl text-2xl px-4 py-2 text-center gap-4 border-2 border-orange-500">
@@ -24,11 +24,10 @@
                     <img class="aspect-square w-[30px] group-hover:hidden"
                          src="/img/addIcon.png" alt="add to list">
                 </a>
-            </div>
         {% else %}
             <div class="flex flex-wrap justify-left gap-5">
                 {% for movie in movies %}
-                    {% if movie.id in watchedMovies %}
+                    {% if movie.id not in watchedMovies %}
                         <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
                             <div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
                                 <img class="aspect-square w-[30px] mt-[5px] group-hover:hidden"
@@ -47,7 +46,7 @@
                 {% endfor %}
                 {% endif %}
 
-
+            </div>
             <h2 class="text-3xl text-gray-400 font-extrabold">WATCHED</h2>
             {% if watchedMovies is empty %}
             <div class="flex flex-col justify-center items-center gap-6">
@@ -81,10 +80,11 @@
                 {% endif %}
 
             </div>
+            </div>
+        </div>
         </div>
         {% block footer %}
             {% include 'components/footer.html.twig' %}
         {% endblock %}
-        </div>
     </div>
 {% endblock %}
