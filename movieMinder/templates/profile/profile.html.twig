@@ -22,18 +22,18 @@
             <div class="flex flex-wrap items-center justify-center text-neutral-200">
                 <div class="max-w-4/6 w-full block rounded-3xl bg-neutral-800 shadow-lg">
                     <div class="lg:flex">
-                        <div class="px-4 md:px-8 lg:w-2/12 text-left md:mx-6 md:p-8">
+                        <div class="px-4 md:px-8 lg:w-3/12 text-left md:mx-6 md:p-8">
                             <h1 class="text-white text-4xl font-bold mt-2 mb-8">PROFILE</h1>
                             <div class="text-white text-xl">
                                 <h2 class="text-gray-400 text-2xl font-bold mb-2">Username</h2>
                                 <h3> • {{ app.user.username }}</h3>
                             </div>
                             <div class="text-white text-xl mb-4">
-                                <h2 class="text-gray-400 text-2xl font-bold mt-4">Email Address</h2>
+                                <h2 class="text-gray-400 text-2xl font-bold mb-2 mt-4">Email Address</h2>
                                 <h3> • {{ app.user.email }}</h3>
                             </div>
                         </div>
-                        <div class="flex items-center lg:w-10/12 rounded-b-lg lg:rounded-e-lg lg:rounded-bl-none">
+                        <div class="flex items-center lg:w-9/12 rounded-b-lg lg:rounded-e-lg lg:rounded-bl-none">
                             <img src="{{ asset('img/profileImg.svg') }}" class="h-full w-full object-cover rounded-3xl"
                                  alt="Profile Image">
                         </div>
@@ -52,7 +52,7 @@
             <div class="flex flex-wrap justify-center gap-14">
                 <div class="flex flex-col justify-center text-center items-center gap-8 rounded-3xl border-4 border-orange-500 p-8 max-w-82 flex-1">
                     <h2 class="text-gray-400 text-2xl font-extrabold">MOVIES WATCHED</h2>
-                    <h3 class="text-white text-4xl"> {{watchedMovieCount}}  </h3>
+                    <h3 class="text-white text-4xl"> {{ watchedMovieCount | default(0) }}  </h3>
                 </div>
                 <div class="flex flex-col justify-center text-center items-center gap-8 rounded-3xl border-4 border-orange-500 p-8 max-w-82 flex-1">
                     <h2 class="text-gray-400 text-2xl font-extrabold">MOVIE TIME</h2>
