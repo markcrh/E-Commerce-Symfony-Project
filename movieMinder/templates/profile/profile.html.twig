@@ -1,4 +1,9 @@
 {% extends 'base.html.twig' %}
+    {% set totalDurationMovies= totalDurationMovies %}
+
+    {% set days = totalDurationMovies // (24 * 60) %}
+    {% set hours = (totalDurationMovies % (24 * 60)) // 60 %}
+    {% set minutes = totalDurationMovies % 60 %}
 
 {% block title %}
     MovieMinder
@@ -39,14 +44,32 @@
             <div>
                 <h1 class="ml-[4%] text-white text-4xl font-bold mt-2">STATS</h1>
             </div>
+            {% for movie in movies %}
+                {% if movie.id in watchedMovies %}
+
+                {% endif %}
+            {% endfor %}
             <div class="flex flex-wrap justify-center gap-14">
                 <div class="flex flex-col justify-center text-center items-center gap-8 rounded-3xl border-4 border-orange-500 p-8 max-w-82 flex-1">
                     <h2 class="text-gray-400 text-2xl font-extrabold">MOVIES WATCHED</h2>
-                    <h3 class="text-white text-4xl"> 7 </h3>
+                    <h3 class="text-white text-4xl"> {{watchedMovieCount}}  </h3>
                 </div>
                 <div class="flex flex-col justify-center text-center items-center gap-8 rounded-3xl border-4 border-orange-500 p-8 max-w-82 flex-1">
                     <h2 class="text-gray-400 text-2xl font-extrabold">MOVIE TIME</h2>
-                    <h3 class="text-white text-4xl"> 1d 3h 16m </h3>
+                    <h3 class="text-white text-4xl">
+                        {% if days > 0 %}
+                            {{ days }}d
+                            {% if hours > 0 or minutes > 0 %} {% endif %}
+                        {% endif %}
+                        {% if hours > 0 %}
+                            {{ hours }}h
+                            {% if minutes > 0 %} {% endif %}
+                        {% endif %}
+
+                        {% if minutes > 0 %}
+                            {{ minutes }}m
+                        {% endif %}
+                    </h3>
                 </div>
                 <div class="flex flex-col justify-center text-center items-center gap-8 rounded-3xl border-4 border-orange-500 p-8 max-w-82 flex-1">
                     <h2 class="text-gray-400 text-2xl font-extrabold">EPISODES WATCHED</h2>
@@ -62,7 +85,11 @@
 
     </main>
 
-    FF
+
+    <h3>
+    </h3>
+
+
     {% block footer %}
         {% include 'components/footer.html.twig' %}
     {% endblock %}

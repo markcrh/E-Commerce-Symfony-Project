@@ -35,7 +35,7 @@
 				<span class="text-center font-bold group-hover:text-orange-500"> {{ movie.title }} </span>
 			</div>
 
-		{% else %}
+		{% else %}z
 			<div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
 				<div class="absolute hidden group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
 					<a href="{{ path('app_user_add_watched', {'movieId': movie.id}) }}">

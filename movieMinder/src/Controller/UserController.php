@@ -74,10 +74,27 @@ class UserController extends AbstractController
     }
 
     #[Route('/profile', name: 'app_user_profile', methods: ['GET'])]
-    public function profile(UserRepository $userRepository): Response
+    public function profile(UserRepository $userRepository, MovieRepository $movieRepository): Response
     {
+        $user = $this->getUser();
+        $myMovies = $user->getMoviesId();
+        $movies = $movieRepository->findBy(['id' => $myMovies]);
+        $watched = $user->getWatchedMovies();
+        $watchedMovies = $watched->map( function (Movie $movie) {
+            return $movie->getId();
+        })->toArray();
+        $totalDurationMovies = 0;
+        foreach ($watched as $movie) {
+            $totalDurationMovies += $movie->getDuration();
+        }
+        $watchedMovieCount = count($watched);
+
         return $this->render('profile/profile.html.twig', [
             'users' => $userRepository->findAll(),
+            'movies' => $movies,
+            'watchedMovies' => $watchedMovies,
+             'totalDurationMovies' => $totalDurationMovies,
+            'watchedMovieCount' => $watchedMovieCount
         ]);
     }
 
