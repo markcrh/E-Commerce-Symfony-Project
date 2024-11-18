@@ -12,11 +12,11 @@
             {% include 'components/headerUser.html.twig' %}
         {% endblock %}
 
-        <div class="flex flex-col justify-center w-full h-auto gap-10 pt-20 pb-16 pl-32 pr-32">
+        <div class="flex flex-col justify-center w-full h-auto gap-10 pt-20 pb-16 pl-24 pr-22">
             <h2 class="text-4xl text-white font-extrabold mb-2">MY MOVIES</h2>
             <div class="flex flex-row gap-6">
                 <h2 class="text-2xl font-extrabold bg-transparent w-[13%] text-center text-orange-600 rounded-3xl border-2 border-orange-600 p-2">PENDING</h2>
-                <a href="{{ path('user_dashboard') }}" class="text-2xl font-extrabold bg-transparent w-[13%] text-center text-gray-400 rounded-3xl border-2 border-gray-400 p-2">WATCHED
+                <a href="{{ path('user_dashboard') }}" class="text-2xl font-extrabold bg-transparent w-[13%] text-center text-gray-400 rounded-3xl border-2 border-gray-400 p-2 hover:text-orange-600 hover:border-orange-600">WATCHED
                 </a>
             </div>
             {% if movies is empty %}
