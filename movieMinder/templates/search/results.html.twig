@@ -23,7 +23,7 @@
         <h2 class="font-bold text-3xl text-gray-300">SEARCH RESULTS for <span class="text-white">"{{ searchTerm }}"</span></h2>
 
         <main class="flex flex-col items-center">
-            <div class="flex flex-wrap justify-left flex-grow w-[100%] gap-6 ml-16">
+            <div class="flex flex-wrap justify-center flex-grow w-full gap-6 ">
                 {% for movie in movies %}
                     <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
                         <div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
@@ -38,14 +38,12 @@
                     </div>
                 {% endfor %}
             </div>
+    </div>
         </main>
         {% include 'components/movieCard.html.twig' %}
         {% block footer %}
             {% include 'components/footer.html.twig' %}
         {% endblock %}
         {% endblock %}
-
-
-
 
 
