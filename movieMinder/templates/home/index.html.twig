@@ -34,11 +34,11 @@
             <div class="flex flex-wrap justify-center flex-grow w-full mb-16 gap-8 mt-16">
                 {% for movie in movies %}
 
-                    <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
+                    <div class="group relative flex flex-col text-white w-[250px] h-full gap-2.5">
                         <div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
                         </div>
                         <a href="{{path('app_register_banner')}}">
-                        <img class="rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500"
+                        <img class="rounded-md w-[250px] h-[350px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500"
                              src="{{ movie.poster }}" alt="{{ movie.title }} ">
                         <span class="text-center font-bold group-hover:text-orange-500">
 							{{ movie.title }}
