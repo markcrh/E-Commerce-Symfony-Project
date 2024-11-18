@@ -29,7 +29,6 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
-
         $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null, 6);
         $watched = $user->getWatchedMovies();
         $watchedMovies = $watched->map( function (Movie $movie) {
@@ -62,7 +61,7 @@ class UserController extends AbstractController
         ]);
     }
     #[Route('/mymovies', name:'show_list', methods: ['GET'])]
-    public function getList(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, MovieRepository $movieRepository): Response
+    public function getList(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
@@ -138,8 +137,8 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/watched/{movieId}', name: 'app_user_add_watched', methods: ['GET','POST'])]
-    public function addWatchedMovie(EntityManagerInterface $entityManager, $movieId): Response
+    #[Route('/watched/{movieId}', name: 'dashboard_add_watched', methods: ['GET','POST'])]
+    public function addWatchedMovieDashboard(EntityManagerInterface $entityManager, $movieId): Response
     {
         $movie = $entityManager->getRepository(Movie::class)->find($movieId);
         $user = $this->getUser();
@@ -148,7 +147,17 @@ class UserController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('user_dashboard', [], Response::HTTP_SEE_OTHER);
     }
-    
+
+    #[Route('/myWatched/{movieId}', name: 'mymovies_add_watched', methods: ['GET','POST'])]
+    public function addWatchedMovieList(EntityManagerInterface $entityManager, $movieId): Response
+    {
+        $movie = $entityManager->getRepository(Movie::class)->find($movieId);
+        $user = $this->getUser();
+        $user->addWatchedMovie($movie);
+        $entityManager->persist($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('show_list', [], Response::HTTP_SEE_OTHER);
+    }
 
 }
 
