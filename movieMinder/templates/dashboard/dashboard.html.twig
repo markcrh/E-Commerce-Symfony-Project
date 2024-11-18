@@ -32,7 +32,7 @@
                             <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
                                 <div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
                                     <img class="aspect-square w-[30px] mt-[5px] group-hover:hidden" src="/img/watched-mark.svg" alt="add to list">
-                                    <a href="{{ path('dashboard_add_watched', {'movieId': movie.id}) }}">
+                                    <a href="{{ path('app_user_add_watched', {'movieId': movie.id}) }}">
                                         <img class="aspect-square w-[30px] hidden group-hover:block" src="/img/not-watched-mark.svg" alt="add to list">
                                     </a>
                                 </div>
@@ -44,7 +44,7 @@
                         {% else %}
                             <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
                                 <div class="absolute hidden group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
-                                    <a href="{{ path('dashboard_add_watched', {'movieId': movie.id}) }}">
+                                    <a href="{{ path('app_user_add_watched', {'movieId': movie.id}) }}">
                                         <img class="aspect-square w-[30px]" src="/img/not-watched-mark.svg" alt="add to list">
                                     </a>
                                 </div>
