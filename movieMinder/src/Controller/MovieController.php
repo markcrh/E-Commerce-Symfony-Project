@@ -84,12 +84,34 @@ class MovieController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_movie_show', methods: ['GET'])]
-    public function show(Movie $movie): Response
+    public function show(int $id, EntityManagerInterface $em): Response
     {
-        return $this->render('movie/show.html.twig', [
-            'movie' => $movie,
-        ]);
+        $movie = $em->getRepository(Movie::class)->find($id);
+
+        if (!$movie) {
+            throw $this->createNotFoundException('The movie does not exist');
+        }
+
+        $user = $this->getUser();
+
+        $userRating = null;
+        if ($user) {
+            $query = $em->createQuery(
+                'SELECT um.rating FROM App\Entity\UserMovie um 
+            WHERE um.user = :user AND um.movie = :movie'
+            )
+                ->setParameter('user', $user)
+                ->setParameter('movie', $movie);
+
+            $userRating = $query->getOneOrNullResult();
+        }
+            return $this->render('movie/show.html.twig', [
+                'movie' => $movie,
+                'userRating' => $userRating ? $userRating['rating'] : null,
+            ]);
+
     }
+
 
     #[Route('/{id}/edit', name: 'app_movie_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Movie $movie, EntityManagerInterface $entityManager): Response
@@ -119,5 +141,79 @@ class MovieController extends AbstractController
 
         return $this->redirectToRoute('app_movie_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    //Ratings!!!!!!
+
+
+    #[Route('/{id}/rate', name: 'app_movie_rate', methods: ['POST'])]
+    public function rateMovie(int $id, Request $request, EntityManagerInterface $em)
+    {
+
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+
+        $movie = $em->getRepository(Movie::class)->find($id);
+        if (!$movie) {
+            $this->addFlash('error', 'The movie does not exist.');
+            return $this->redirectToRoute('app_movie_index'); // O a donde desees redirigir
+        }
+
+
+        if (!in_array($movie->getId(), $user->getMoviesId())) {
+            $this->addFlash('error', 'You must watch the movie before rating it.');
+            return $this->redirectToRoute('app_movie_show', ['id' => $movie->getId()]);
+        }
+
+
+        $rating = (int) $request->request->get('rating');
+        if ($rating < 1 || $rating > 10) {
+            $this->addFlash('error', 'Rating must be between 1 and 10.');
+            return $this->redirectToRoute('app_movie_show', ['id' => $movie->getId()]);
+        }
+
+
+        $conn = $em->getConnection();
+        $sql = 'INSERT INTO user_movie (user_id, movie_id, rating) 
+            VALUES (:user_id, :movie_id, :rating) 
+            ON DUPLICATE KEY UPDATE rating = :rating';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            'user_id' => $user->getId(),
+            'movie_id' => $movie->getId(),
+            'rating' => $rating,
+        ]);
+
+
+        $this->updateMovieRating($movie, $em);
+
+
+        $this->addFlash('success', 'Your rating has been saved!');
+        return $this->redirectToRoute('app_movie_show', ['id' => $movie->getId()]);
+    }
+
+
+    private function updateMovieRating(Movie $movie, EntityManagerInterface $em)
+    {
+
+        $query = $em->createQuery(
+            'SELECT AVG(um.rating) 
+        FROM App\Entity\UserMovie um 
+        WHERE um.movie = :movie'
+        )
+            ->setParameter('movie', $movie);
+
+
+        $averageRating = $query->getSingleScalarResult();
+        $averageRating = $averageRating !== null ? round($averageRating) : null;
+
+        $movie->setRating($averageRating);
+        $em->flush();
+    }
+
+
 
 }

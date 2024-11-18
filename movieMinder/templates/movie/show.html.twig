@@ -1,63 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Movie{% endblock %}
+{% block title %}{{ movie.title }}{% endblock %}
 
 {% block body %}
-
-    <h1>Movie</h1>
-
-    <table class="table text-white">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ movie.id }}</td>
-            </tr>
-            <tr>
-                <th class="text-white">Title</th>
-                <td>{{ movie.title }}</td>
-            </tr>
-            <tr>
-                <th>Year</th>
-                <td>{{ movie.year }}</td>
-            </tr>
-            <tr>
-                <th>Duration</th>
-                <td>{{ movie.duration }}</td>
-            </tr>
-            <tr>
-                <th>Synopsis</th>
-                <td>{{ movie.synopsis }}</td>
-            </tr>
-            <tr>
-                <th>Genres_id</th>
-                <td>{{ movie.genresId }}</td>
-            </tr>
-            <tr>
-                <th>Poster</th>
-                <td>{{ movie.poster }}</td>
-            </tr>
-            <tr>
-                <th>Trailer</th>
-                <td>{{ movie.trailer }}</td>
-            </tr>
-            <tr>
-                <th>Rating</th>
-                <td>{{ movie.rating }}</td>
-            </tr>
-            <tr>
-                <th>Platforms</th>
-                <td>{{ movie.platforms }}</td>
-            </tr>
-            <tr>
-                <th>Watched</th>
-                <td>{{ movie.watched ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_movie_index') }}">back to list</a>
-
-    <a href="{{ path('app_movie_edit', {'id': movie.id}) }}">edit</a>
-
-    {{ include('movie/_delete_form.html.twig') }}
+    {% block header %}
+        {% include 'components/headerUser.html.twig' %}
+    {% endblock %}
+<div class="flex flex-col items-center bg-black text-white p-4">
+    <div class="flex flex-row items-center justify-between w-full max-w-4xl">
+        <!-- Poster a la izquierda -->
+        <div class="flex-shrink-0">
+            <img src="{{ movie.poster }}" alt="Poster de {{ movie.title }}" class="w-48 h-auto rounded-md">
+        </div>
+        <!-- Contenido a la derecha (título, año, duración, sinopsis) -->
+        <div class="ml-6 flex flex-col justify-between">
+            <h1 class="text-3xl font-bold">{{ movie.title }} ({{ movie.year }})</h1>
+            <p class="text-lg mt-2">{{ movie.synopsis }}</p>
+            <div class="mt-4">
+                <p class="text-sm">Duration: {{ movie.duration }} minutes</p>
+                <h3 class="mt-2 text-xl">Rating:
+                    {% if userRating is not null %}
+                        {{ userRating }} (Your rating)
+                    {% else %}
+                        Not rated yet.
+                    {% endif %}
+                </h3>
+            </div>
+            {% if app.user %}
+                <h3 class="mt-4 text-lg">Rate this movie:</h3>
+                <form action="{{ path('app_movie_rate', {'id': movie.id}) }}" method="POST" class="mt-2">
+                    <label for="rating" class="mr-2">Your rating (1-10):</label>
+                    <input type="number" id="rating" name="rating" min="1" max="10" required
+                           class="p-2 border border-gray-300 rounded-md text-black bg-white"
+                           value="{{ userRating is not null ? userRating : '' }}">
+                    <button type="submit" class="ml-2 bg-orange-500 text-black p-2 rounded-md">Submit Rating</button>
+                </form>
+            {% else %}
+                <p class="mt-4">You need to be logged in to rate movies.</p>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <a href="{{ path('app_movie_index') }}" class="mt-6 text-lg text-orange-500">Back to movie list</a>
+</div>
+    {% block footer %}
+        {% include 'components/footer.html.twig' %}
+    {% endblock %}
 {% endblock %}
