@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% block header %}
+        {% include 'components/header.html.twig' %}
+    {% endblock %}
+    <div class="flex flex-wrap items-center justify-center text-neutral-800 mt-[2%] mb-[2%]">
+        <div class="w-full max-w-screen-lg">
+            <div class="block rounded-3xl shadow-lg bg-neutral-800">
+                <div class="g-0 lg:flex lg:flex-wrap">
+                    <div class="flex items-center rounded-b-lg lg:w-5/12 lg:rounded-e-lg lg:rounded-bl-none">
+                        <div class="h-full w-full relative">
+                            <img src="{{ asset('img/contactus.png') }}" class="absolute inset-0 w-full h-full object-cover rounded-3xl" alt="MovieMinder Logo">
+                        </div>
+                    </div>
+                    <div class="px-4 md:px-0 lg:w-7/12 lg:order-last flex flex-col justify-between p-8">
+                        <div class="md:mx-6 md:p-8">
+                            <div class="flex flex-row justify-start text-white mt-6 mb-[2%]">
+                                <h2 class="mt-2 text-4xl font-extrabold">CONTACT US</h2>
+                                <img class="ml-5 w-20" src="{{ asset('img/logoNoText.svg') }}" alt="logo">
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-left mb-4 text-orange-500">Let's talk</p>
+                                <form method="post" class="text-gray-300 text-xl">
+                                    <div class="relative" data-twe-input-wrapper-init>
+                                        <label for="name">Your name</label><br>
+                                        <input type="text" id="name" name="name" required class="peer block w-full rounded border-0 bg-white px-3 py-2 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary dark:text-black dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"><br>
+                                    </div>
+                                    <div class="relative" data-twe-input-wrapper-init>
+                                        <label for="email">Your email Address</label><br>
+                                        <input class="peer block w-full rounded border-0 bg-white px-3 py-2 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary dark:text-black dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary" type="email" id="email" name="email" required><br>
+                                    </div>
+                                    <div class="relative" data-twe-input-wrapper-init>
+                                        <label for="message">Your message</label><br>
+                                        <textarea class="peer block min-h-[150px] max-h-[200px] w-full rounded border-0 bg-white px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary dark:text-black dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary" id="message" name="message" required></textarea><br>
+                                    </div>
+
+                                    <div class="mt-2 pb-1 pt-1 text-center">
+                                        <button
+                                                class="rounded-3xl text-xl mb-3 inline-block w-full font-bold px-6 pb-2 pt-2.5 uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+                                                type="submit"
+                                                style="background: linear-gradient(to right, #fc5400, #f18100);">
+                                            SEND MESSAGE
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    {% block footer %}
+        {% include 'components/footer.html.twig' %}
+    {% endblock %}
+{% endblock %}
