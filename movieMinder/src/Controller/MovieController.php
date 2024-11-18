@@ -8,6 +8,7 @@ use App\Form\MovieType;
 use App\Repository\MovieRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Url;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,20 +39,21 @@ class MovieController extends AbstractController
     }
 
     #[Route('/add/{id}', name: 'add_movie_user', methods: ['GET', 'POST'])]
-    public function addMovieUser(int $id, EntityManagerInterface $em): Response
+    public function addMovieUser(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $url = $request->headers->get('referer');
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
         if (!in_array($id, $myMovies)) {
             $myMovies[] = $id;
             $user->setMoviesId($myMovies);
-            $em->flush();
+            $entityManager->flush();
         } else {
             unset($myMovies[array_search($id, $myMovies)]);
             $user->setMoviesId($myMovies);
-            $em->flush();
+            $entityManager->flush();
         }
-        return $this->redirectToRoute('app_movie_index');
+        return $this->redirect($url);
     }
 
     #[Route('/new', name: 'app_movie_new', methods: ['GET', 'POST'])]
@@ -60,7 +62,6 @@ class MovieController extends AbstractController
         $movie = new Movie();
         $form = $this->createForm(MovieType::class, $movie);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($movie);
             $entityManager->flush();
@@ -73,6 +74,14 @@ class MovieController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/card', name: 'app_movie_card')]
+    public function showCard(Request $request): Response
+    {
+        return $this->render('components/card.html.twig', [
+        ]);
+    }
+
 
     #[Route('/{id}', name: 'app_movie_show', methods: ['GET'])]
     public function show(int $id, EntityManagerInterface $em): Response
