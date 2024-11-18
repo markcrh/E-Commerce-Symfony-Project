@@ -29,7 +29,7 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
-        $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null, 6);
+        $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null, 8);
         $watched = $user->getWatchedMovies();
         foreach ($movies as $movie) {
             $movieGenres = $movie->getGenres();
@@ -72,7 +72,7 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
-        $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null, 6);
+        $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null,);
         $watched = $user->getWatchedMovies();
         $watchedMovies = $watched->map( function (Movie $movie) {
             return $movie->getId();

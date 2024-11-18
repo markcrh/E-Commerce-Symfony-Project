@@ -13,7 +13,7 @@
         {% endblock %}
 
         <div class="flex flex-col justify-center w-full h-auto gap-10 pt-20 pb-16 pl-32 pr-32">
-            <h2 class="text-5xl text-white font-extrabold mb-10">MY MOVIES</h2>
+            <h2 class="text-5xl text-white font-extrabold mb-2">MY MOVIES</h2>
 
             <h2 class="text-3xl text-gray-400 font-extrabold">PENDING</h2>
             {% if movies is empty %}
@@ -41,7 +41,10 @@
                                     <img class="aspect-square w-[30px]" src="/img/not-watched-mark.svg" alt="add to list">
                                 </a>
                             </div>
-                            <img class="rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
+
+                            <img data-movie-id="{{ movie.id }}" class="openPop rounded-md w-[200px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
+
+
                             <span class="text-center font-bold group-hover:text-orange-500"> {{ movie.title }} </span>
                         </div>
                     {% endif %}
@@ -91,7 +94,8 @@
             </div>
             </div>
         </div>
-        </div>
+
+    {% include 'components/movieCard.html.twig' %}
         {% block footer %}
             {% include 'components/footer.html.twig' %}
         {% endblock %}
