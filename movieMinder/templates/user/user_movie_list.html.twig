@@ -41,7 +41,10 @@
                                     <img class="aspect-square w-[30px]" src="/img/not-watched-mark.svg" alt="add to list">
                                 </a>
                             </div>
+
                             <img data-movie-id="{{ movie.id }}" class="openPop rounded-md w-[200px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
+
+
                             <span class="text-center font-bold group-hover:text-orange-500"> {{ movie.title }} </span>
                         </div>
                     {% endif %}
@@ -80,7 +83,7 @@
                                 </a>
                             </div>
                             <img data-movie-id="{{ movie.id }}"
-                                 class="openPop rounded-md w-[200px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500"
+                                 class="openPop rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500"
                                  src="{{ movie.poster }}" alt="{{ movie.title }}">
                             <span class="text-center font-bold group-hover:text-orange-500">{{ movie.title }}</span>
                         </div>

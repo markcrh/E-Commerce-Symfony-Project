@@ -31,13 +31,20 @@ class UserController extends AbstractController
         $myMovies = $user->getMoviesId();
         $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null, 8);
         $watched = $user->getWatchedMovies();
+        foreach ($movies as $movie) {
+            $movieGenres = $movie->getGenres();
+            foreach ($movieGenres as $genre) {
+                $movie->genresName[] = $genre->getName();
+            }
+        }
         $watchedMovies = $watched->map( function (Movie $movie) {
             return $movie->getId();
         })->toArray();
 
         return $this->render('dashboard/dashboard.html.twig', [
             'movies' => $movies,
-            'watchedMovies' => $watchedMovies
+            'watchedMovies' => $watchedMovies,
+            'myMovies' => $myMovies,
         ]);
     }
 
@@ -70,6 +77,12 @@ class UserController extends AbstractController
         $watchedMovies = $watched->map( function (Movie $movie) {
             return $movie->getId();
         })->toArray();
+        foreach ($movies as $movie) {
+            $movieGenres = $movie->getGenres();
+            foreach ($movieGenres as $genre) {
+                $movie->genresName[] = $genre->getName();
+            }
+        }
         return $this->render('user/user_movie_list.html.twig', [
             'movies' => $movies,
             'watchedMovies' => $watchedMovies
