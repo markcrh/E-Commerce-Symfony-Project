@@ -137,26 +137,16 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/watched/{movieId}', name: 'dashboard_add_watched', methods: ['GET','POST'])]
-    public function addWatchedMovieDashboard(EntityManagerInterface $entityManager, $movieId): Response
+    #[Route('/watched/{movieId}', name: 'app_user_add_watched', methods: ['GET','POST'])]
+    public function addWatchedMovie(Request $request, EntityManagerInterface $entityManager, $movieId): Response
     {
         $movie = $entityManager->getRepository(Movie::class)->find($movieId);
         $user = $this->getUser();
+        $url = $request->headers->get('referer');
         $user->addWatchedMovie($movie);
         $entityManager->persist($user);
         $entityManager->flush();
-        return $this->redirectToRoute('user_dashboard', [], Response::HTTP_SEE_OTHER);
-    }
-
-    #[Route('/myWatched/{movieId}', name: 'mymovies_add_watched', methods: ['GET','POST'])]
-    public function addWatchedMovieList(EntityManagerInterface $entityManager, $movieId): Response
-    {
-        $movie = $entityManager->getRepository(Movie::class)->find($movieId);
-        $user = $this->getUser();
-        $user->addWatchedMovie($movie);
-        $entityManager->persist($user);
-        $entityManager->flush();
-        return $this->redirectToRoute('show_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirect($url, Response::HTTP_SEE_OTHER);
     }
 
 }
