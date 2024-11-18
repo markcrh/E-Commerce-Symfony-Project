@@ -54,4 +54,13 @@ class HomeController extends AbstractController
             'searchTerm' => $searchTerm,
         ]);
     }
+
+    #[Route('/contact', name: 'app_contact')]
+    public function contact(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('contact/contact.html.twig', [
+
+        ]);
+    }
+
 }
