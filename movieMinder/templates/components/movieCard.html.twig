@@ -1,3 +1,5 @@
+
+<div id="overlay" class="fixed inset-0 bg-black opacity-70 hidden z-40"></div>
 {% for movie in movies %}
     <div id="popup-{{ movie.id }}" class="hidden fixed inset-0 flex items-center justify-center z-50 popup">
         <div class="max-w-[50%] w-full">
@@ -53,8 +55,12 @@
                 button.addEventListener('click', function() {
                     const movieId = button.getAttribute('data-movie-id');
                     const popup = document.getElementById('popup-' + movieId);
+                    const overlay = document.getElementById('overlay');
+
+                    // Show the popup and overlay
                     popup.classList.remove('hidden');  // Show the popup
                     popup.classList.add('flex');       // Apply flexbox
+                    overlay.classList.remove('hidden'); // Show the overlay
                 });
             });
 
@@ -64,8 +70,12 @@
                 button.addEventListener('click', function() {
                     const movieId = button.id.split('-')[1];
                     const popup = document.getElementById('popup-' + movieId);
+                    const overlay = document.getElementById('overlay');
+
+                    // Hide the popup and overlay
                     popup.classList.add('hidden');  // Hide the popup
                     popup.classList.remove('flex'); // Remove flexbox layout
+                    overlay.classList.add('hidden'); // Hide the overlay
                 });
             });
         });
