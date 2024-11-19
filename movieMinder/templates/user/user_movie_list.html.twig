@@ -26,16 +26,15 @@
 
     </main>
 
-    {% block footer %}
+   {# {% block footer %}
         {% include 'components/footer.html.twig' %}
-    {% endblock %}
+    {% endblock %}#}
 
 
-{% endblock %}
 
 {# mainTest below this line #}
 
-            <div id="overlay" class="fixed inset-0 bg-black opacity-70 hidden z-40"></div>
+           {# <div id="overlay" class="fixed inset-0 bg-black opacity-70 hidden z-40"></div>
             {% for movie in movies %}
                 <div id="popup-{{ movie.id }}" class="hidden fixed inset-0 flex items-center justify-center z-50 popup">
                     <div class="max-w-[50%] w-full">
@@ -61,7 +60,7 @@
                                             <div class="relative mb-4">
                                                 <p class="text-white text-xl mb-8">{{ movie.synopsis }}</p>
 
-{# desde aqui al endif son es lo de los ratings #}
+#}{# desde aqui al endif son es lo de los ratings #}{#
 <div class="mt-4">
 
 	<h3 class="mt-2 text-xl">Rating total:{{movie.rating}}</h3>
@@ -134,9 +133,9 @@
                         });
                     });
                 </script>
-            {% endblock %}
+            {% endblock %}#}
         {% block footer %}
             {% include 'components/footer.html.twig' %}
         {% endblock %}
-    </div>
+
 {% endblock %}
