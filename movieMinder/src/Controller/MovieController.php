@@ -20,8 +20,11 @@ class MovieController extends AbstractController
         $user = $this->getUser();
         $movieList = $user->getMoviesId();
         $movies = $entityManager->getRepository(Movie::class)->findAll();
+        foreach ($movies as $movie) {
+            $movies[] = $movie;
+        }
 
-        /*$userRating = null;
+        $userRating = null;
         if ($user) {
             $query = $entityManager->createQuery(
                 'SELECT um.rating FROM App\Entity\UserMovie um 
@@ -33,12 +36,12 @@ class MovieController extends AbstractController
             $userRating = $query->getOneOrNullResult();
         }
 
-        $this->updateMovieRating($movie, $entityManager);*/
+        $this->updateMovieRating($movie, $entityManager);
 
         return $this->render('movie/index.html.twig', [
-            'movies' => $entityManager->getRepository(Movie::class)->findAll(),
+            'movies' => $movies = $entityManager->getRepository(Movie::class)->findAll(),
             'user' => $user,
-            /*'userRating' => $userRating ? $userRating['rating'] : null,*/
+            'userRating' => $userRating ? $userRating['rating'] : null,
             'movieList' => $movieList
         ]);
     }
@@ -201,7 +204,7 @@ class MovieController extends AbstractController
     }
 
 
-  /*  private function updateMovieRating(Movie $movie, EntityManagerInterface $em)
+    private function updateMovieRating(Movie $movie, EntityManagerInterface $em)
     {
 
         $query = $em->createQuery(
@@ -217,7 +220,7 @@ class MovieController extends AbstractController
 
         $movie->setRating($averageRating);
         $em->flush();
-    }*/
+    }
 
 
 

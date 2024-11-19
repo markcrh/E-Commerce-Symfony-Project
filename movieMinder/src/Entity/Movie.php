@@ -43,9 +43,6 @@ class Movie
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $platforms = null;
 
-    #[ORM\Column(length: 255)]
-    private ?bool $watched = false;
-
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'watched_movies')]
     private Collection $users;
 
@@ -165,18 +162,6 @@ class Movie
     public function setPlatforms(?string $platforms): static
     {
         $this->platforms = $platforms;
-
-        return $this;
-    }
-
-    public function getwatched()
-    {
-        return $this->watched;
-    }
-
-    public function setwatched(bool $watched)
-    {
-        $this->watched = $watched;
 
         return $this;
     }
