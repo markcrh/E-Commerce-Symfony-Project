@@ -31,12 +31,6 @@ class UserController extends AbstractController
         $myMovies = $user->getMoviesId();
         $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null, 8);
         $watched = $user->getWatchedMovies();
-        foreach ($movies as $movie) {
-            $movieGenres = $movie->getGenres();
-            foreach ($movieGenres as $genre) {
-                $movie->genresName[] = $genre->getName();
-            }
-        }
         $watchedMovies = $watched->map( function (Movie $movie) {
             return $movie->getId();
         })->toArray();
@@ -48,7 +42,7 @@ class UserController extends AbstractController
             WHERE um.user = :user AND um.movie = :movie'
             )
                 ->setParameter('user', $user)
-                ->setParameter('movie', $movie);
+                ->setParameter('movie', $movies);
 
             $userRating = $query->getOneOrNullResult();
         }
@@ -90,12 +84,6 @@ class UserController extends AbstractController
         $watchedMovies = $watched->map( function (Movie $movie) {
             return $movie->getId();
         })->toArray();
-        foreach ($movies as $movie) {
-            $movieGenres = $movie->getGenres();
-            foreach ($movieGenres as $genre) {
-                $movie->genresName[] = $genre->getName();
-            }
-        }
 
         $userRating = null;
         if ($user) {
@@ -104,7 +92,7 @@ class UserController extends AbstractController
             WHERE um.user = :user AND um.movie = :movie'
             )
                 ->setParameter('user', $user)
-                ->setParameter('movie', $movie);
+                ->setParameter('movie', $movies);
 
             $userRating = $query->getOneOrNullResult();
         }
