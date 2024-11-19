@@ -9,8 +9,25 @@
 		{% include 'components/headerUser.html.twig' %}
 	{% endblock %}
 
-	<main class="flex flex-col items-center flex-grow">
-		<div class="flex flex-wrap justify-start gap-12 pt-16 pb-10 pl-20 pr-20">
+	<h2 class="text-white pl-20 text-4xl font-extrabold mt-20">ALL MOVIES</h2>
+	<div class="pl-20 flex items-end mt-12">
+		<h3 class="text-gray-400 text-2xl font-extrabold">Sort by</h3>
+		<div class="ml-5 flex items-center space-x-3">
+			<a href="{{ path('app_movie_index') }}" class="text-orange-500 font-normal text-2xl hover:text-orange-700 underline">
+				All
+			</a>
+			<span class="text-orange-500 font-normal text-2xl">|</span>
+			<a href="{{ path('app_movie_sortedAlp') }}" class="text-orange-500 font-normal text-2xl hover:text-orange-700">
+				A-Z
+			</a>
+			<span class="text-orange-500 font-normal text-2xl">|</span>
+			<a href="{{ path('app_movie_sortedYear') }}" class="text-orange-500 font-normal text-2xl hover:text-orange-700">
+				Year
+			</a>
+		</div>
+	</div>
+	<main class="flex flex-col flex-grow mt-10">
+		<div class="flex flex-wrap justify-start -mt-12 gap-12 pt-16 pb-10 pl-20 pr-20">
 			{% for movie in movies %}
 				<div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
 					<div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[35px] h-[35px]">
@@ -31,6 +48,8 @@
 				</div>
 			{% endfor %}
 		</div>
+
+
 		<div id="overlay" class="fixed inset-0 bg-black opacity-70 hidden z-40"></div>
 		{% for movie in movies %}
 			<div id="popup-{{ movie.id }}" class="hidden fixed inset-0 flex items-center justify-center z-50 popup">

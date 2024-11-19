@@ -21,6 +21,7 @@ class MovieController extends AbstractController
     #[Route('/', name: 'app_movie_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
+
         $user = $this->getUser();
         $movieList = $user->getMoviesId();
         $user = $this->getUser();
@@ -44,6 +45,53 @@ class MovieController extends AbstractController
             'watchedMovies' => $watchedMovies
         ]);
     }
+
+#[Route('/sortedAlp', name: 'app_movie_sortedAlp', methods: ['GET'])]
+    public function sortedAlp(MovieRepository $movieRepository): Response
+    {
+        $user = $this->getUser();
+        $movieList = $user->getMoviesId();
+        $movies = $movieRepository->findAll();
+        $sortedByTitle = $this->sortByTitle($movies);
+
+        return $this->render('movie/indexSortedAlp.html.twig', [
+            'moviesByTitle' => $sortedByTitle,
+            'movieList' => $movieList,
+            'movies' => $movies,
+        ]);
+    }
+
+    #[Route('/sortedYear', name: 'app_movie_sortedYear', methods: ['GET'])]
+    public function sortedYear(MovieRepository $movieRepository): Response
+    {
+        $user = $this->getUser();
+        $movieList = $user->getMoviesId();
+        $movies = $movieRepository->findAll();
+        $sortedByYear = $this->sortByYear($movies);
+
+        return $this->render('movie/indexSortedYear.html.twig', [
+            'moviesByYear' => $sortedByYear,
+            'movieList' => $movieList,
+            'movies' => $movies,
+        ]);
+    }
+    private function sortByYear($movies)
+    {
+        usort($movies, function($a, $b) {
+            return $b->getYear() <=> $a->getYear();  // Use <=> for comparison
+        });
+        return $movies;
+    }
+
+    // Sort movies alphabetically by title
+    private function sortByTitle($movies)
+    {
+        usort($movies, function($a, $b) {
+            return strcmp($a->getTitle(), $b->getTitle());  // String comparison
+        });
+        return $movies;
+    }
+
 
     #[Route('/add/{id}', name: 'add_movie_user', methods: ['GET', 'POST'])]
     public function addMovieUser(int $id, Request $request, EntityManagerInterface $entityManager): Response
