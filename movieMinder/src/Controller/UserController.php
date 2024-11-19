@@ -41,10 +41,23 @@ class UserController extends AbstractController
             return $movie->getId();
         })->toArray();
 
+        $userRating = null;
+        if ($user) {
+            $query = $entityManager->createQuery(
+                'SELECT um.rating FROM App\Entity\UserMovie um 
+            WHERE um.user = :user AND um.movie = :movie'
+            )
+                ->setParameter('user', $user)
+                ->setParameter('movie', $movie);
+
+            $userRating = $query->getOneOrNullResult();
+        }
+        
         return $this->render('dashboard/dashboard.html.twig', [
             'movies' => $movies,
             'watchedMovies' => $watchedMovies,
             'myMovies' => $myMovies,
+            'userRating' => $userRating ? $userRating['rating'] : null,
         ]);
     }
 
@@ -83,9 +96,23 @@ class UserController extends AbstractController
                 $movie->genresName[] = $genre->getName();
             }
         }
+
+        $userRating = null;
+        if ($user) {
+            $query = $entityManager->createQuery(
+                'SELECT um.rating FROM App\Entity\UserMovie um 
+            WHERE um.user = :user AND um.movie = :movie'
+            )
+                ->setParameter('user', $user)
+                ->setParameter('movie', $movie);
+
+            $userRating = $query->getOneOrNullResult();
+        }
+
         return $this->render('user/user_movie_list.html.twig', [
             'movies' => $movies,
-            'watchedMovies' => $watchedMovies
+            'watchedMovies' => $watchedMovies,
+            'userRating' => $userRating ? $userRating['rating'] : null
         ]);
     }
     #[Route('/profile', name: 'app_user_profile', methods: ['GET'])]
