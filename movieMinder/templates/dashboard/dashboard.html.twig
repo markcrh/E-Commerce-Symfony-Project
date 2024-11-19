@@ -16,8 +16,8 @@
             <h2 class="text-4xl text-white font-extrabold mb-2">MY MOVIES</h2>
 
             <div class="flex flex-row gap-6">
-                <h2 class="text-2xl font-extrabold bg-transparent w-[13%] text-center text-orange-600 rounded-3xl border-2 border-orange-600 p-2">WATCHED</h2>
                 <a href="{{ path('show_list') }}" class="text-2xl font-extrabold bg-transparent w-[13%] text-center text-gray-400 rounded-3xl border-2 border-gray-400 p-2 hover:text-orange-600 hover:border-orange-600">PENDING</a>
+                <h2 class="text-2xl font-extrabold bg-transparent w-[13%] text-center text-orange-600 rounded-3xl border-2 border-orange-600 p-2">WATCHED</h2>
             </div>
             {% if watchedMovies is empty %}
             <div class="flex flex-col justify-center items-center gap-6">
@@ -89,7 +89,7 @@
                                     <div class="relative mb-4">
                                         <p class="text-white text-xl mb-8">{{ movie.synopsis }}</p>
                                         <div class="mb-2 pb-1 pt-1 text-center">
-                                            <a href="{{ path('app_register') }}">
+                                            <a href="{{movie.trailer}}">
                                                 <button
                                                         class="rounded-3xl text-lg mb-3 inline-block w-3/4 font-bold px-6 pb-2 pt-2.5 uppercase leading-normal text-white shadow-lg transition duration-150 ease-in-out hover:shadow-xl focus:shadow-xl focus:outline-none focus:ring-0 active:shadow-lg"
                                                         type="submit"
