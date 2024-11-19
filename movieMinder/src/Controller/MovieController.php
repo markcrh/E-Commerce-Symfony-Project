@@ -2,12 +2,8 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Genre;
 use App\Entity\Movie;
 use App\Form\MovieType;
-use App\Repository\MovieRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,17 +28,31 @@ class MovieController extends AbstractController
             return $movie->getId();
         })->toArray();
         foreach ($movies as $movie) {
-            $movieGenres = $movie->getGenres();
-            foreach ($movieGenres as $genre) {
-                $movie->genresName[] = $genre->getName();
-            }
+            $movies[] = $movie;
         }
 
+        $userRating = null;
+        if ($user) {
+            $query = $entityManager->createQuery(
+                'SELECT um.rating FROM App\Entity\UserMovie um 
+            WHERE um.user = :user AND um.movie = :movie'
+            )
+                ->setParameter('user', $user)
+                ->setParameter('movie', $movie);
+
+            $userRating = $query->getOneOrNullResult();
+        }
+
+        $this->updateMovieRating($movie, $entityManager);
+
         return $this->render('movie/index.html.twig', [
-            'movies' => $entityManager->getRepository(Movie::class)->findAll(),
+            'movies' => $movies = $entityManager->getRepository(Movie::class)->findAll(),
             'user' => $user,
             'movieList' => $movieList,
             'watchedMovies' => $watchedMovies
+            'userRating' => $userRating ? $userRating['rating'] : null,
+            'movieList' => $movieList
+
         ]);
     }
 
@@ -160,10 +170,10 @@ class MovieController extends AbstractController
 
             $userRating = $query->getOneOrNullResult();
         }
-            return $this->render('movie/show.html.twig', [
-                'movie' => $movie,
-                'userRating' => $userRating ? $userRating['rating'] : null,
-            ]);
+        return $this->render('movie/show.html.twig', [
+            'movie' => $movie,
+            'userRating' => $userRating ? $userRating['rating'] : null,
+        ]);
 
     }
 
@@ -189,7 +199,7 @@ class MovieController extends AbstractController
     #[Route('/{id}', name: 'app_movie_delete', methods: ['POST'])]
     public function delete(Request $request, Movie $movie, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$movie->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $movie->getId(), $request->request->get('_token'))) {
             $entityManager->remove($movie);
             $entityManager->flush();
         }
@@ -214,20 +224,20 @@ class MovieController extends AbstractController
         $movie = $em->getRepository(Movie::class)->find($id);
         if (!$movie) {
             $this->addFlash('error', 'The movie does not exist.');
-            return $this->redirectToRoute('app_movie_index'); // O a donde desees redirigir
+            return $this->redirectToRoute('app_movie_index');
         }
 
 
         if (!in_array($movie->getId(), $user->getMoviesId())) {
             $this->addFlash('error', 'You must watch the movie before rating it.');
-            return $this->redirectToRoute('app_movie_show', ['id' => $movie->getId()]);
+            return $this->redirectToRoute('app_movie_index', ['id' => $movie->getId()]);
         }
 
 
         $rating = (int) $request->request->get('rating');
         if ($rating < 1 || $rating > 10) {
             $this->addFlash('error', 'Rating must be between 1 and 10.');
-            return $this->redirectToRoute('app_movie_show', ['id' => $movie->getId()]);
+            return $this->redirectToRoute('app_movie_index', );
         }
 
 
@@ -247,7 +257,7 @@ class MovieController extends AbstractController
 
 
         $this->addFlash('success', 'Your rating has been saved!');
-        return $this->redirectToRoute('app_movie_show', ['id' => $movie->getId()]);
+        return $this->redirectToRoute('app_movie_index');
     }
 
 

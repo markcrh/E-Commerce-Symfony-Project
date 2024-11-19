@@ -31,20 +31,27 @@ class UserController extends AbstractController
         $myMovies = $user->getMoviesId();
         $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null, 8);
         $watched = $user->getWatchedMovies();
-        foreach ($movies as $movie) {
-            $movieGenres = $movie->getGenres();
-            foreach ($movieGenres as $genre) {
-                $movie->genresName[] = $genre->getName();
-            }
-        }
         $watchedMovies = $watched->map( function (Movie $movie) {
             return $movie->getId();
         })->toArray();
 
+        $userRating = null;
+        if ($user) {
+            $query = $entityManager->createQuery(
+                'SELECT um.rating FROM App\Entity\UserMovie um 
+            WHERE um.user = :user AND um.movie = :movie'
+            )
+                ->setParameter('user', $user)
+                ->setParameter('movie', $movies);
+
+            $userRating = $query->getOneOrNullResult();
+        }
+        
         return $this->render('dashboard/dashboard.html.twig', [
             'movies' => $movies,
             'watchedMovies' => $watchedMovies,
             'myMovies' => $myMovies,
+            'userRating' => $userRating ? $userRating['rating'] : null,
         ]);
     }
 
@@ -77,15 +84,23 @@ class UserController extends AbstractController
         $watchedMovies = $watched->map( function (Movie $movie) {
             return $movie->getId();
         })->toArray();
-        foreach ($movies as $movie) {
-            $movieGenres = $movie->getGenres();
-            foreach ($movieGenres as $genre) {
-                $movie->genresName[] = $genre->getName();
-            }
+
+        $userRating = null;
+        if ($user) {
+            $query = $entityManager->createQuery(
+                'SELECT um.rating FROM App\Entity\UserMovie um 
+            WHERE um.user = :user AND um.movie = :movie'
+            )
+                ->setParameter('user', $user)
+                ->setParameter('movie', $movies);
+
+            $userRating = $query->getOneOrNullResult();
         }
+
         return $this->render('user/user_movie_list.html.twig', [
             'movies' => $movies,
-            'watchedMovies' => $watchedMovies
+            'watchedMovies' => $watchedMovies,
+            'userRating' => $userRating ? $userRating['rating'] : null
         ]);
     }
     #[Route('/profile', name: 'app_user_profile', methods: ['GET'])]
