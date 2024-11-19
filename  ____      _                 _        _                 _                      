@@ -1,0 +1,735 @@
+[33mcommit 64379b9919714fe1c44065529f2a0c0031e99e71[m[33m ([m[1;36mHEAD -> [m[1;32mmark_dev[m[33m, [m[1;31morigin/mainTest[m[33m)[m
+Merge: afd97fa 03afa17
+Author: didimensional <168994464+didimensional@users.noreply.github.com>
+Date:   Tue Nov 19 09:16:42 2024 +0000
+
+    Merge pull request #23 from markcrh/didiBranch
+    
+    Didi branch
+
+[33mcommit 03afa17af22a6eb290f589cb0df149b090f42178[m
+Author: didi <didivergente@gmail.com>
+Date:   Mon Nov 18 22:25:44 2024 +0000
+
+    stiling advise done
+
+[33mcommit 4b6444e1ddc194d85f8b5a1b8832c190c89b7e9f[m
+Author: didi <didivergente@gmail.com>
+Date:   Mon Nov 18 22:17:11 2024 +0000
+
+    dark and blury background when popup pops
+
+[33mcommit bcd6b26d4711a10d968591624975e4ee3e97b3e3[m
+Author: didi <didivergente@gmail.com>
+Date:   Mon Nov 18 22:04:39 2024 +0000
+
+    margins fixed
+
+[33mcommit 877ff613c0a955bbe1da43269bf797a8931a1ae6[m
+Author: didi <didivergente@gmail.com>
+Date:   Mon Nov 18 21:52:16 2024 +0000
+
+    movies list and usermenu fixed
+
+[33mcommit 4416d4c13ab74c0b73c1285111bc548089a9f61a[m
+Author: didi <didivergente@gmail.com>
+Date:   Mon Nov 18 21:16:10 2024 +0000
+
+    all movies template fixed
+
+[33mcommit 23d1fa3db72f3ac13459a6b29b7d18c4fed2b709[m
+Author: didi <didivergente@gmail.com>
+Date:   Mon Nov 18 20:39:24 2024 +0000
+
+    consistency + buttons
+
+[33mcommit 76e64d1061229fd924c5fa1219fb73db01856f2c[m
+Author: didi <didivergente@gmail.com>
+Date:   Mon Nov 18 20:10:16 2024 +0000
+
+    consistency cards job done
+
+[33mcommit 9f15475567124afda8064a01560a78d37120775e[m
+Author: didi <didivergente@gmail.com>
+Date:   Mon Nov 18 19:58:46 2024 +0000
+
+    trying consistency with cards
+
+[33mcommit afd97fa88f14154c1fad604aab4c705139951a82[m
+Merge: 872a51e 730500e
+Author: didimensional <168994464+didimensional@users.noreply.github.com>
+Date:   Mon Nov 18 16:49:22 2024 +0000
+
+    Merge pull request #22 from markcrh/didiBranch
+    
+    Didi branch
+
+[33mcommit 730500e095327e9c48d37665a12ef1d9a6d042bf[m
+Merge: fa919a3 872a51e
+Author: didimensional <168994464+didimensional@users.noreply.github.com>
+Date:   Mon Nov 18 16:49:09 2024 +0000
+
+    Merge branch 'mainTest' into didiBranch
+
+[33mcommit fa919a3e42d90721a6bc0261b9f27a7d9479d7b7[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Mon Nov 18 16:46:43 2024 +0000
+
+    hola
+
+[33mcommit 872a51e6e5dfca7632c399284df51ece8e1a5f77[m
+Merge: f1076d6 b6468a6
+Author: Mark <156428082+markcrh@users.noreply.github.com>
+Date:   Mon Nov 18 16:34:26 2024 +0000
+
+    Merge pull request #21 from markcrh/mark_dev
+    
+    still fixing things, lost count of it
+
+[33mcommit b6468a65bdb75e5b979521dd7e611a8c434f0957[m[33m ([m[1;31morigin/mark_dev[m[33m)[m
+Author: mark <markcrh97@gmail.com>
+Date:   Mon Nov 18 16:33:38 2024 +0000
+
+    still fixing things, lost count of it
+
+[33mcommit ac6e6a081c15709b7b0542a174cb094a246cbad4[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Mon Nov 18 15:53:45 2024 +0000
+
+    redirections fixed
+
+[33mcommit e98ea3844b3b496dde1a1a585572989f36febbe2[m
+Merge: 196e474 f1076d6
+Author: didimensional <168994464+didimensional@users.noreply.github.com>
+Date:   Mon Nov 18 15:14:29 2024 +0000
+
+    Merge pull request #20 from markcrh/mainTest
+    
+    Main test
+
+[33mcommit 196e474f378b2461194e687021e5005ec8eaa5eb[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Mon Nov 18 15:11:18 2024 +0000
+
+    uff
+
+[33mcommit 914491c1ef563117e2106d8a45f45f97c31c5032[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Mon Nov 18 15:04:50 2024 +0000
+
+    movie card component
+
+[33mcommit f1076d62c0a7f914786761bbc29ee6f522526fda[m
+Merge: ef4fa1b cc4e938
+Author: marcorebasd <santanadiazmarco@gmail.com>
+Date:   Mon Nov 18 14:50:54 2024 +0000
+
+    Merge pull request #18 from markcrh/marco
+    
+    avg data storage working, now is true
+
+[33mcommit cc4e9389217d025e134b503d33f238e2e0340fa1[m
+Author: marco <santandiazmarco@gmail.com>
+Date:   Mon Nov 18 14:49:48 2024 +0000
+
+    avg data storage working, now is true
+
+[33mcommit 5f00ab5ad55ed79015e33a4530d1d57c7b9c3ae6[m
+Merge: 9069cc6 e21c45b
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Mon Nov 18 14:33:37 2024 +0000
+
+    merge
+
+[33mcommit 9069cc62aa4b2c45e0b45308a4dc2819e6fc6cd1[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Mon Nov 18 14:23:28 2024 +0000
+
+    movie card pop-up added to all views
+
+[33mcommit ef4fa1bc28d203744c21d99adacaf5afbae2c2bd[m
+Merge: afb336c 0504e26
+Author: marcorebasd <santanadiazmarco@gmail.com>
+Date:   Mon Nov 18 14:19:07 2024 +0000
+
+    Merge pull request #16 from markcrh/marco
+    
+    Marco
+
+[33mcommit 0504e26f15497a0987ba1608db287b873ed658cd[m
+Merge: 91c34f8 afb336c
+Author: marcorebasd <santanadiazmarco@gmail.com>
+Date:   Mon Nov 18 14:18:57 2024 +0000
+
+    Merge branch 'mainTest' into marco
+
+[33mcommit afb336cd3016023958776edaac33809f5a4cd60e[m
+Merge: 37f1460 4714e58
+Author: Mark <156428082+markcrh@users.noreply.github.com>
+Date:   Mon Nov 18 14:13:23 2024 +0000
+
+    Merge pull request #15 from markcrh/mark_dev
+    
+    simplified the UserController's routes
+
+[33mcommit e21c45b0681fd8e68d69c9a20d3e5c4c80a66cf2[m
+Merge: f3929cb f899531
+Author: didimensional <168994464+didimensional@users.noreply.github.com>
+Date:   Mon Nov 18 14:12:29 2024 +0000
+
+    Merge branch 'mainTest3' into didiBranch
+
+[33mcommit 4714e5845cec7f71fc60b229436e9142faf0084d[m
+Author: mark <markcrh97@gmail.com>
+Date:   Mon Nov 18 14:12:13 2024 +0000
+
+    simplified the UserController's routes
+
+[33mcommit f3929cb33e444da6bd963e7f0481e9baf0f01b59[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Mon Nov 18 14:10:12 2024 +0000
+
+    contact done
+
+[33mcommit aa60141602accd429d4d85fbc5e0ab269dcd5b1a[m
+Merge: bca4003 37f1460
+Author: didimensional <168994464+didimensional@users.noreply.github.com>
+Date:   Mon Nov 18 13:01:59 2024 +0000
+
+    Merge pull request #13 from markcrh/mainTest
+    
+    Main test
+
+[33mcommit 37f1460f25d19372ebd9a645af73cc6854365c41[m
+Merge: 0d6049b 5ffff09
+Author: Mark <156428082+markcrh@users.noreply.github.com>
+Date:   Mon Nov 18 12:59:23 2024 +0000
+
+    Merge pull request #12 from markcrh/mark_dev
+    
+    Fix
+
+[33mcommit 91c34f892bb2c0a7051b40e7e672de358b46e6d9[m
+Author: marco <santandiazmarco@gmail.com>
+Date:   Mon Nov 18 12:56:41 2024 +0000
+
+    avg data storage working
+
+[33mcommit f8995319dc348f7dff247dca69e469b043c2b4cc[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Mon Nov 18 12:50:10 2024 +0000
+
+    contact donee
+
+[33mcommit 0da5ec4ef117fe24c119c12a43078083ff1dab9f[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Mon Nov 18 12:49:55 2024 +0000
+
+    contact done
+
+[33mcommit 68d49066096f82d116bd33c037a51e64c9a33931[m
+Author: marco <santandiazmarco@gmail.com>
+Date:   Mon Nov 18 12:36:04 2024 +0000
+
+    vuelta atrás, ya guarda de nuevo los ratings por usuario
+
+[33mcommit 5ffff09fc58cf3b319d5672abbc6fa95d3a7d087[m
+Author: mark <markcrh97@gmail.com>
+Date:   Mon Nov 18 12:14:06 2024 +0000
+
+    pulled from mark_testing branch
+
+[33mcommit c3261e1fc3a08ef1c05a08212c43652c7e240a6c[m[33m ([m[1;31morigin/mark_testing[m[33m, [m[1;32mmark_testing[m[33m)[m
+Author: mark <markcrh97@gmail.com>
+Date:   Mon Nov 18 12:10:06 2024 +0000
+
+    fixed errors regarding watched buttons, routes and styling; added web icon to navtab on base template
+
+[33mcommit bca4003f984ee533655976ab0e6bea6084a67b64[m[33m ([m[1;31morigin/didiBranch[m[33m)[m
+Author: didi <didivergente@gmail.com>
+Date:   Sun Nov 17 22:37:01 2024 +0000
+
+    lots of styling done2
+
+[33mcommit b377f8905db7bfa8a8658ba667623a2a3ee79d84[m
+Author: didi <didivergente@gmail.com>
+Date:   Sun Nov 17 22:30:11 2024 +0000
+
+    lots of styling done
+
+[33mcommit 8558a4b8dfb89ff450ef1418415fa5a4b7d944b5[m
+Author: didi <didivergente@gmail.com>
+Date:   Sun Nov 17 21:42:59 2024 +0000
+
+    some styling in dashboards
+
+[33mcommit 2590eafca5d6e175182f98f892f10c644ccc1f0c[m
+Author: didi <didivergente@gmail.com>
+Date:   Sun Nov 17 20:09:52 2024 +0000
+
+    profile polishing
+
+[33mcommit 74c843d69112718664fcacb4f4c28310061e819b[m
+Author: didi <didivergente@gmail.com>
+Date:   Sun Nov 17 19:50:24 2024 +0000
+
+    profile page with logic finishec
+
+[33mcommit 6c4813eff65406ff301a86796b89a2b1fecd84bb[m
+Author: didi <didivergente@gmail.com>
+Date:   Sun Nov 17 18:59:15 2024 +0000
+
+    profile page without logic
+
+[33mcommit 5379af8d267d0b65c1bd23167c3b90a41b182f4c[m
+Author: didi <didivergente@gmail.com>
+Date:   Sun Nov 17 00:45:03 2024 +0000
+
+    added movie list to home, added search bar to user menu, added links to registration pop up at homepage
+
+[33mcommit 39c516788666fa540f32b45229908809a0aeaf24[m
+Merge: 11defcf 0d6049b
+Author: didimensional <168994464+didimensional@users.noreply.github.com>
+Date:   Sat Nov 16 21:42:22 2024 +0000
+
+    Merge pull request #11 from markcrh/mainTest
+    
+    Main test
+
+[33mcommit 11defcf8ed3ef700bf65dc0c87e0e9cf5d5e70c6[m
+Author: didi <didivergente@gmail.com>
+Date:   Sat Nov 16 21:39:14 2024 +0000
+
+    error handling
+
+[33mcommit e48827457df11f0249eb2abfc2867aae4d1626f0[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Fri Nov 15 17:01:41 2024 +0000
+
+    popup sorted
+
+[33mcommit 059d955b8660ee1fa7d287673e912eeace19b23c[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Fri Nov 15 16:57:44 2024 +0000
+
+    popup
+
+[33mcommit 0d6049bfd5c559a556627ce3d875ad0e662b7ad9[m
+Merge: 910b1b0 a6ea7f7
+Author: marcorebasd <santanadiazmarco@gmail.com>
+Date:   Fri Nov 15 16:50:03 2024 +0000
+
+    Merge pull request #9 from markcrh/marco
+    
+    Marco
+
+[33mcommit a6ea7f7c917ec5ed50d3fb76b12208f7ab16314c[m
+Merge: d41d316 910b1b0
+Author: marcorebasd <santanadiazmarco@gmail.com>
+Date:   Fri Nov 15 16:49:47 2024 +0000
+
+    Merge branch 'mainTest' into marco
+
+[33mcommit d41d31663fcc9d7fce1456455a90283e02ec3976[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Fri Nov 15 16:41:37 2024 +0000
+
+    logout button on header
+
+[33mcommit 910b1b0f7f05ca85162e018fe9aad314d6be6e21[m
+Merge: 102c83c 5627457
+Author: Mark <156428082+markcrh@users.noreply.github.com>
+Date:   Fri Nov 15 16:30:21 2024 +0000
+
+    Merge pull request #8 from markcrh/mark_dev
+    
+    merge mark_dev > mainTest
+
+[33mcommit 562745739137897aec8c6e9d9ce0f37a05673a7e[m
+Author: mark <markcrh97@gmail.com>
+Date:   Fri Nov 15 16:20:10 2024 +0000
+
+    created the db table 'genres' and its mtm table with 'movies'; also added the movie.genre data on the '/movie/ route'
+
+[33mcommit a449063b639a0f446063c8de649996efd558aa65[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Fri Nov 15 15:33:39 2024 +0000
+
+    few styles
+
+[33mcommit 1dcba2b3813172199ee8374b022c7f675fe65714[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Fri Nov 15 14:48:41 2024 +0000
+
+    results
+
+[33mcommit be4167bf93704f8b4011ffcc9071f30b87aede7a[m
+Author: mark <markcrh97@gmail.com>
+Date:   Fri Nov 15 14:24:09 2024 +0000
+
+    added ManyToMany (User <> Movies) table to db, added route and functionalities to user's dashboard movie cards
+
+[33mcommit 1867f76aff75a731cc57107448a2a84124056f55[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Fri Nov 15 12:51:12 2024 +0000
+
+    results page done
+
+[33mcommit 4f94b661305b805aa758d9d34e5ac2953f801954[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Fri Nov 15 11:47:02 2024 +0000
+
+    My movies view ok, but not full stylized
+
+[33mcommit 465b53501672be3ea8bff8b26ddc0da3d49681dd[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Fri Nov 15 11:28:16 2024 +0000
+
+    search bar styled
+
+[33mcommit a226b8bb44bbc6f7ca582f2aee342f29e223055c[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Fri Nov 15 11:01:44 2024 +0000
+
+    search bar good again thanks to yeray
+
+[33mcommit f7757bac3a2c745dc212cc8cc8a3047a23bf6dec[m
+Merge: 46bf4f0 102c83c
+Author: didimensional <168994464+didimensional@users.noreply.github.com>
+Date:   Fri Nov 15 10:16:55 2024 +0000
+
+    Merge pull request #7 from markcrh/mainTest
+    
+    Main test
+
+[33mcommit 102c83ced06a275a2a120994cc32f12f3f40a7b9[m
+Merge: 0319ca9 46bf4f0
+Author: didimensional <168994464+didimensional@users.noreply.github.com>
+Date:   Fri Nov 15 10:16:47 2024 +0000
+
+    Merge branch 'didiBranch' into mainTest
+
+[33mcommit 0319ca9943b1773bac7dbaf80b445ac4d6f7e008[m
+Merge: 1b6c4f1 019aca3
+Author: Mark <156428082+markcrh@users.noreply.github.com>
+Date:   Fri Nov 15 09:35:20 2024 +0000
+
+    Merge pull request #6 from markcrh/mark_dev
+    
+    merge mark_dev -> mainTest (conflicts resolved)
+
+[33mcommit 019aca3c253c78b091930a33d392fd17b2aec783[m
+Merge: dd5e2ec 1b6c4f1
+Author: Mark <156428082+markcrh@users.noreply.github.com>
+Date:   Fri Nov 15 09:34:50 2024 +0000
+
+    Merge branch 'mainTest' into mark_dev
+
+[33mcommit 46bf4f0f32dc31215beb08ff8b451b22b852d61d[m
+Author: didi <didivergente@gmail.com>
+Date:   Thu Nov 14 22:23:58 2024 +0000
+
+    register pop up
+
+[33mcommit 1b6c4f1c0af91a89e8e5efe4a8549f134bcffbbc[m
+Merge: 018b81f 0aa5872
+Author: marcorebasd <santanadiazmarco@gmail.com>
+Date:   Thu Nov 14 16:47:20 2024 +0000
+
+    Merge pull request #4 from markcrh/marco
+    
+    Marco
+
+[33mcommit 53436cae02db37c62dd87cdb3cd3b819cf27e751[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Thu Nov 14 16:44:36 2024 +0000
+
+    search bar complete
+
+[33mcommit dd5e2ec5cdbc8d95961ac161541b0514c66f2a9d[m
+Author: mark <markcrh97@gmail.com>
+Date:   Thu Nov 14 16:36:48 2024 +0000
+
+    fixed 'add movie to list' button and controller; the feature now adds or removes the movie form the user list depending if it already exists in it or not
+
+[33mcommit 04af782674cdbec9b9759342ca926b2a7d62b6fc[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Thu Nov 14 16:33:19 2024 +0000
+
+    search bar with years
+
+[33mcommit 865c04ba6023a8de13b8442a5d43b50444e15b02[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Thu Nov 14 16:18:13 2024 +0000
+
+    search bar functional
+
+[33mcommit 0aa5872c89190f71f722d670844df0a7bcdc5625[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Thu Nov 14 16:07:03 2024 +0000
+
+    dashboard show user movies
+
+[33mcommit c174badab09fe84ccc6e2993f572562b82339d92[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Thu Nov 14 12:59:23 2024 +0000
+
+    link from login to register ok
+
+[33mcommit f72756c770a99017eba844bf83bd9e83bd464df2[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Thu Nov 14 12:40:58 2024 +0000
+
+    adsf
+
+[33mcommit de3ec805000b5c8bf8cf6e556df22ea379f5b9d9[m
+Merge: d5c6510 018b81f
+Author: didimensional <168994464+didimensional@users.noreply.github.com>
+Date:   Thu Nov 14 12:05:55 2024 +0000
+
+    Merge pull request #3 from markcrh/mainTest
+    
+    Main test
+
+[33mcommit 018b81f3a153aeb877051ea304ca4ebedff5f217[m
+Merge: c207098 d5c6510
+Author: didimensional <168994464+didimensional@users.noreply.github.com>
+Date:   Thu Nov 14 12:05:44 2024 +0000
+
+    Merge branch 'mainTest2' into mainTest
+
+[33mcommit d5c6510a2d160ccc1719bd6d91012f1e604e87dd[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Thu Nov 14 12:03:13 2024 +0000
+
+    que
+
+[33mcommit 4e9bf8d4f048049ea00ce9c89679fe8652c83850[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Thu Nov 14 11:59:59 2024 +0000
+
+    changes
+
+[33mcommit c20709897032cd551ee9d6d70e773855de26704d[m
+Merge: 6634577 5256325
+Author: marcorebasd <santanadiazmarco@gmail.com>
+Date:   Thu Nov 14 11:57:00 2024 +0000
+
+    Merge pull request #2 from markcrh/marco
+    
+    Marco
+
+[33mcommit 52563253a387e42b777ba958370788c09e53a01c[m
+Merge: 9ddfbcf 6634577
+Author: marcorebasd <santanadiazmarco@gmail.com>
+Date:   Thu Nov 14 11:56:49 2024 +0000
+
+    Merge branch 'mainTest' into marco
+
+[33mcommit 6634577bed7346b876a66e581c55ae7a9d70aadd[m
+Author: Mark <156428082+markcrh@users.noreply.github.com>
+Date:   Thu Nov 14 11:52:50 2024 +0000
+
+    Update fix index.html.twig
+
+[33mcommit f861f9e0b3e262b746d887995162b21d6df56d69[m
+Merge: 67c3ce8 04f0397
+Author: Mark <156428082+markcrh@users.noreply.github.com>
+Date:   Thu Nov 14 11:51:42 2024 +0000
+
+    Merge pull request #1 from markcrh/mark_dev
+    
+    movie cards template for the movie index view
+
+[33mcommit 04f0397b8a10b1d44f955e5905ecfe19e76bde5b[m
+Merge: 6ba1f51 67c3ce8
+Author: Mark <156428082+markcrh@users.noreply.github.com>
+Date:   Thu Nov 14 11:51:08 2024 +0000
+
+    Merge branch 'mainTest' into mark_dev
+
+[33mcommit 6ba1f51ffb3aa7f70f8bffc5e3ccdc7d703f6626[m
+Author: mark <markcrh97@gmail.com>
+Date:   Thu Nov 14 11:44:54 2024 +0000
+
+    movie cards template for the movie index view
+
+[33mcommit 67c3ce82cff3590ec46c01d868c68f447ef6853c[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Thu Nov 14 11:17:52 2024 +0000
+
+    register done
+
+[33mcommit 9ddfbcfcf2ef36fdc8e779dc4045c821246189d7[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Thu Nov 14 10:42:16 2024 +0000
+
+    Login Style
+
+[33mcommit b4135413eac534bdfa2c5d97d00782b6bc63b6df[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Thu Nov 14 09:49:35 2024 +0000
+
+    lala
+
+[33mcommit e2a0eb24e27f0bd4cd851c9d943ae081ffc6eca5[m[33m ([m[1;31morigin/marco[m[33m)[m
+Author: marco <santandiazmarco@gmail.com>
+Date:   Thu Nov 14 00:36:52 2024 +0000
+
+    working on login style
+
+[33mcommit e091376c48bfa183326ea34b261772dc196a6dea[m
+Author: didi <didivergente@gmail.com>
+Date:   Wed Nov 13 23:20:12 2024 +0000
+
+    register and search bar done
+
+[33mcommit abcfb4c3fef81c70d18c8da066e20f82d6d86f0b[m
+Author: didi <didivergente@gmail.com>
+Date:   Wed Nov 13 22:50:54 2024 +0000
+
+    register done
+
+[33mcommit 70499e13caa1d9de0c7734c3227fea4b51de3b22[m[33m ([m[1;31morigin/mainTest3[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: didi <didivergente@gmail.com>
+Date:   Wed Nov 13 19:53:32 2024 +0000
+
+    few styling changes
+
+[33mcommit 0531e2067c264f15dc838d134edba47c2ecb6b61[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Wed Nov 13 16:56:32 2024 +0000
+
+    adding ids
+
+[33mcommit 1d189d1c634ad54de28aa77fb5e170b0af2e47ca[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Wed Nov 13 15:34:57 2024 +0000
+
+    migrations ok, movies_id arrays
+
+[33mcommit 89e26d12f98a115c53f82e71b9c7f258c271f5d2[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Wed Nov 13 14:39:36 2024 +0000
+
+    some routes added
+
+[33mcommit 787a1dd0a787aa35c2ce2b08f5113d55d8cf4bdc[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Wed Nov 13 12:57:05 2024 +0000
+
+    route to dashboard done
+
+[33mcommit 3f26d6281481a3cf62d268cb01a99961d2c8419a[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Wed Nov 13 12:46:53 2024 +0000
+
+    Movie CRUD created (editing pending)
+
+[33mcommit 9e146ba6d0d3fc35195f038f460de613371c9330[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Wed Nov 13 11:45:38 2024 +0000
+
+    created movie entity (editing pending)
+
+[33mcommit 370bf08390e327aab632181a3a344e321bebc038[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Wed Nov 13 11:32:24 2024 +0000
+
+    footer template done and working properly
+
+[33mcommit 00b5fc1b883a17c082b20402f55192607145c7b1[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Wed Nov 13 10:00:13 2024 +0000
+
+    header template
+
+[33mcommit 0b647c34743c464bc46a78b245c1fabef92d8251[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 16:27:46 2024 +0000
+
+    user entity and CRUD done
+
+[33mcommit ff0735be1b33cacf1a0f9184a33c70639ba9ec59[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 15:55:37 2024 +0000
+
+    solved
+
+[33mcommit ff39329f98c07cff99d0b3f1e6da590600862759[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 15:48:55 2024 +0000
+
+    trying to fix
+
+[33mcommit 6f5a0c832cc3a46134e8faabe0eb3ba15f827b81[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 14:44:20 2024 +0000
+
+    registration form done
+
+[33mcommit 190e8ea06cfc0d19787b0a86b2274e956c64caf2[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 14:37:22 2024 +0000
+
+    trying delete .env4
+
+[33mcommit 2d431caa587e263af9cfc9e87b5ee9a1f357bad4[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 14:33:47 2024 +0000
+
+    trying delete .env3
+
+[33mcommit 5713830c34ffd35cbb9d85f136e619f676202be0[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 14:33:04 2024 +0000
+
+    trying delete .env2
+
+[33mcommit 723ef13baf6506254318c851a2750820f931d6e2[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 14:31:14 2024 +0000
+
+    trying delete .env
+
+[33mcommit 9e52b0e6672f676958b3c210885a4b841a693278[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 14:29:09 2024 +0000
+
+    auth done
+
+[33mcommit 36ef2efed503e188ffe01f771df0426e0097a598[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 14:26:27 2024 +0000
+
+    user entity created
+
+[33mcommit 65f598eeeb570abcbadb34838ea8e6b47ef26024[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 14:10:26 2024 +0000
+
+    new proyect symfony
+
+[33mcommit aa2a9146b15014e456a518832c7dc3593b537151[m
+Author: Reboot Student <didivergente@gmail.com>
+Date:   Tue Nov 12 14:08:27 2024 +0000
+
+    new proyect symfony
+
+[33mcommit 6a9c2a11f00897ec34e1caa52c0b367030c6dbc2[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Tue Nov 12 14:07:00 2024 +0000
+
+    delete
+
+[33mcommit e928e23af70b18740d7cc9ec87e25b694cfb5334[m
+Author: Marco <santanadiazmarco@gmail.com>
+Date:   Tue Nov 12 12:58:01 2024 +0000
+
+    ProjectCreated
+
+[33mcommit d110b1d90c3060d78edede6ebdea0fe4d0903fcc[m
+Author: Mark <156428082+markcrh@users.noreply.github.com>
+Date:   Fri Nov 8 14:27:43 2024 +0000
+
+    Initial commit
