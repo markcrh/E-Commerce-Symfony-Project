@@ -13,20 +13,24 @@
 		<div class="flex flex-wrap justify-start gap-12 pt-16 pb-10 pl-20 pr-20">
 			{% for movie in movies %}
 				<div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
-					<div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
-						<img class="aspect-square w-[35px] mt-[5px] group-hover:hidden" src="/img/check-mark.svg" alt="add to list">
-						<a href="{{ path('add_movie_user', {'id': movie.id}) }}">
-							<img class="aspect-square w-[25px] hidden group-hover:block" src="/img/remove-mark.svg" alt="add to list">
-						</a>
+					<div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[35px] h-[35px]">
+						{% if movie.id in movieList %}
+							<a class="addButton" href="{{ path('add_movie_user', {'id': movie.id}) }}">
+								<img data-movie-id2="{{ movie.id }}" class="aspect-square ml-2 w-[25px] mt-[5px]" src="/img/remove-mark.svg" alt="remove from watched list">
+							</a>
+						{% else %}
+							<a class="addButton" href="{{ path('add_movie_user', {'id': movie.id}) }}">
+								<img data-movie-id2="{{ movie.id }}" class="ml-2 aspect-square w-[25px] mt-[5px]" src="/img/add.svg" alt="add to watched list">
+							</a>
+						{% endif %}
 					</div>
-					<img data-movie-id="{{ movie.id }}" class="openPop rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
+					<img data-movie-id="{{ movie.id }}" class="openPop rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }}">
 					<span class="text-center font-bold group-hover:text-orange-500">
-                {{ movie.title }}
-            </span>
+                    {{ movie.title }}
+                </span>
 				</div>
 			{% endfor %}
 		</div>
-
 		<div id="overlay" class="fixed inset-0 bg-black opacity-70 hidden z-40"></div>
 		{% for movie in movies %}
 			<div id="popup-{{ movie.id }}" class="hidden fixed inset-0 flex items-center justify-center z-50 popup">
@@ -76,8 +80,6 @@
 		{% endfor %}
 		{% block javascripts %}
 			<script>
-				document.addEventListener('DOMContentLoaded', function () {
-					// Open popup logic
 					const openPopupBtns = document.querySelectorAll('.openPop');
 					openPopupBtns.forEach(button => {
 						button.addEventListener('click', function() {
@@ -85,11 +87,9 @@
 							const popup = document.getElementById('popup-' + movieId);
 							const overlay = document.getElementById('overlay');
 
-							// Show the popup and overlay
-							popup.classList.remove('hidden');  // Show the popup
-							popup.classList.add('flex');       // Apply flexbox
-							overlay.classList.remove('hidden'); // Show the overlay
-						});
+							popup.classList.remove('hidden');
+							popup.classList.add('flex');
+							overlay.classList.remove('hidden');
 					});
 					const closePopupBtns = document.querySelectorAll('.closePop');
 					closePopupBtns.forEach(button => {
@@ -99,9 +99,9 @@
 							const overlay = document.getElementById('overlay');
 
 							// Hide the popup and overlay
-							popup.classList.add('hidden');  // Hide the popup
-							popup.classList.remove('flex'); // Remove flexbox layout
-							overlay.classList.add('hidden'); // Hide the overlay
+							popup.classList.add('hidden');
+							popup.classList.remove('flex');
+							overlay.classList.add('hidden');
 						});
 					});
 				});

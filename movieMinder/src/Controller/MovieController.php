@@ -23,7 +23,13 @@ class MovieController extends AbstractController
     {
         $user = $this->getUser();
         $movieList = $user->getMoviesId();
+        $user = $this->getUser();
+        $myMovies = $user->getMoviesId();
         $movies = $entityManager->getRepository(Movie::class)->findAll();
+        $watched = $user->getWatchedMovies();
+        $watchedMovies = $watched->map( function (Movie $movie) {
+            return $movie->getId();
+        })->toArray();
         foreach ($movies as $movie) {
             $movieGenres = $movie->getGenres();
             foreach ($movieGenres as $genre) {
@@ -35,6 +41,7 @@ class MovieController extends AbstractController
             'movies' => $entityManager->getRepository(Movie::class)->findAll(),
             'user' => $user,
             'movieList' => $movieList,
+            'watchedMovies' => $watchedMovies
         ]);
     }
 
