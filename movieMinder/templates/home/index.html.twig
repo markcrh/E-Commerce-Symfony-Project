@@ -22,7 +22,7 @@
             <h1 class="text-orange-500 text-5xl font-extrabold">NEVER FORGET WHAT YOU'VE SEEN</h1>
             <h2 class="text-white text-4xl">Remember every episode, every movie and stay on top of your viewing
                 habits</h2>
-                        {%  if not app.user %}
+                    {%  if not app.user %}
             <div class="flex items-center justify-between mt-10 max-w-4xl mx-auto bg-white rounded-full border-2 border-gray-300 hover:border-orange-500 px-4 py-2">
                 <div class="flex w-full items-center">
                     <form action="/search" method="GET" class="flex flex-row">
@@ -59,7 +59,6 @@
         </div>
 
     </main>
-
 
     {% block footer %}
         {% include 'components/footer.html.twig' %}

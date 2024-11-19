@@ -1,6 +1,10 @@
 
 <div id="overlay" class="fixed inset-0 bg-black opacity-70 hidden z-40"></div>
 {% for movie in movies %}
+    {% set genresNames = [] %}
+    {% for genre in movie.getGenres() %}
+        {% set genresNames = genresNames|merge([genre.getName()]) %}
+    {% endfor %}
     <div id="popup-{{ movie.id }}" class="hidden fixed inset-0 flex items-center justify-center z-50 popup">
         <div class="max-w-[50%] w-full">
             <div class="block rounded-3xl shadow-lg bg-neutral-800">
@@ -15,8 +19,11 @@
                             <div>
                                 <p class="text-4xl font-bold text-left mt-6 mb-8 text-gray-200">{{ movie.title }}</p>
                                 <div class="flex flex-row text-white text-2xl gap-12 mb-4">
-                                    <h3><b>{{ movie.year }} </b></h3>
-                                    <h3><b>{{ movie.duration }} min </b></h3>
+                                    <h2><b>{{ movie.year }} </b></h2>
+                                    <h2><b>{{ movie.duration }} min </b></h2>
+                                </div>
+                                <div class="flex flex-row text-white text-2xl gap-12 mb-4">
+                                    <h2><b>{{ genresNames[0] }}/{{ genresNames[1] }} </b></h2>
                                 </div>
                                 <div>
                                     <img src="{{ asset('img/stars.svg') }}" class="w-3/4 rounded-3xl mb-6" alt="stars">
@@ -45,6 +52,7 @@
             </div>
         </div>
     </div>
+
 {% endfor %}
 {% block javascripts %}
     <script>

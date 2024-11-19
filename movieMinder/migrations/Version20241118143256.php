@@ -32,18 +32,5 @@ final class Version20241118143256 extends AbstractMigration
         $this->addSql('ALTER TABLE user_movie ADD CONSTRAINT FK_FF9C09378F93B6FC FOREIGN KEY (movie_id) REFERENCES movie (id) ON DELETE CASCADE');
     }
 
-    public function down(Schema $schema): void
-    {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE movie_genre DROP FOREIGN KEY FK_FD1229648F93B6FC');
-        $this->addSql('ALTER TABLE movie_genre DROP FOREIGN KEY FK_FD1229644296D31F');
-        $this->addSql('ALTER TABLE user_movie DROP FOREIGN KEY FK_FF9C0937A76ED395');
-        $this->addSql('ALTER TABLE user_movie DROP FOREIGN KEY FK_FF9C09378F93B6FC');
-        $this->addSql('DROP TABLE genre');
-        $this->addSql('DROP TABLE movie');
-        $this->addSql('DROP TABLE movie_genre');
-        $this->addSql('DROP TABLE `user`');
-        $this->addSql('DROP TABLE user_movie');
-        $this->addSql('DROP TABLE messenger_messages');
-    }
+
 }
