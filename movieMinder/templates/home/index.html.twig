@@ -10,7 +10,11 @@
     <main class="flex flex-col flex-grow">
 
         {% block header %}
-            {% include 'components/header.html.twig' %}
+            {%  if app.user %}
+                {% include 'components/headerUser.html.twig' %}
+            {% else %}
+                {% include 'components/header.html.twig' %}
+            {% endif %}
         {% endblock %}
 
 
@@ -18,6 +22,7 @@
             <h1 class="text-orange-500 text-5xl font-extrabold">NEVER FORGET WHAT YOU'VE SEEN</h1>
             <h2 class="text-white text-4xl">Remember every episode, every movie and stay on top of your viewing
                 habits</h2>
+                        {%  if not app.user %}
             <div class="flex items-center justify-between mt-10 max-w-4xl mx-auto bg-white rounded-full border-2 border-gray-300 hover:border-orange-500 px-4 py-2">
                 <div class="flex w-full items-center">
                     <form action="/search" method="GET" class="flex flex-row">
@@ -28,8 +33,8 @@
                         </a>
                     </form>
                 </div>
+                        {% endif %}
             </div>
-
 
             <div class="flex flex-wrap justify-center flex-grow w-full mb-16 gap-8 mt-16">
                 {% for movie in movies %}
@@ -37,8 +42,12 @@
                     <div class="group relative flex flex-col text-white w-[250px] h-full gap-2.5">
                         <div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
                         </div>
-                        <a href="{{path('app_register_banner')}}">
-                        <img class="rounded-md w-[250px] h-[350px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500"
+                            {%  if not app.user  %}
+                                <a href="{{path('app_register_banner')}}">
+                            {% else %}
+                                {% include 'components/movieCard.html.twig' %}
+                            {%  endif %}
+                        <img data-movie-id="{{ movie.id }}" class="openPop cursor-pointer rounded-md w-[250px] h-[350px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500"
                              src="{{ movie.poster }}" alt="{{ movie.title }} ">
                         <span class="text-center font-bold group-hover:text-orange-500">
 							{{ movie.title }}
@@ -55,5 +64,4 @@
     {% block footer %}
         {% include 'components/footer.html.twig' %}
     {% endblock %}
-
 {% endblock %}
