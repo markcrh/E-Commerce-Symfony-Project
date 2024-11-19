@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Genre;
 use App\Entity\Movie;
 use App\Form\MovieType;
