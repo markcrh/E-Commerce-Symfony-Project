@@ -8,11 +8,11 @@
     {% endblock %}
 <div class="flex flex-col items-center bg-black text-white p-4">
     <div class="flex flex-row items-center justify-between w-full max-w-4xl">
-        <!-- Poster a la izquierda -->
+        
         <div class="flex-shrink-0">
             <img src="{{ movie.poster }}" alt="Poster de {{ movie.title }}" class="w-48 h-auto rounded-md">
         </div>
-        <!-- Contenido a la derecha (título, año, duración, sinopsis) -->
+        
         <div class="ml-6 flex flex-col justify-between">
             <h1 class="text-3xl font-bold">{{ movie.title }} ({{ movie.year }})</h1>
             <p class="text-lg mt-2">{{ movie.synopsis }}</p>
