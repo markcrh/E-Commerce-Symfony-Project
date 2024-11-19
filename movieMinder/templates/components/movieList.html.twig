@@ -7,7 +7,7 @@
                     <img class="aspect-square w-[25px] hidden group-hover:block" src="/img/remove-mark.svg" alt="add to list">
                 </a>
             </div>
-            <img class="rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
+            <img data-movie-id="{{ movie.id }}" class="openPop cursor-pointer rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
             <span class="text-center font-bold group-hover:text-orange-500">
 							{{ movie.title }}
 						</span>
@@ -20,7 +20,7 @@
                     <img class="aspect-square w-[25px]" src="/img/add.svg" alt="add to list">
                 </a>
             </div>
-            <img class="rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
+            <img data-movie-id="{{ movie.id }}" class="openPop cursor-pointer rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
             <span class="text-center font-bold group-hover:text-orange-500">
 							{{ movie.title }}
 						</span>
