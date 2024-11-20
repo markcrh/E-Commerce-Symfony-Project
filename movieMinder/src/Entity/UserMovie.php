@@ -22,7 +22,7 @@ class UserMovie
     private ?Movie $movie = null;
 
     #[ORM\Column(type: "integer")]
-    private ?int $rating = null;
+    private ?int $rating = 0;
 
     public function getUser(): ?User
     {
@@ -59,4 +59,6 @@ class UserMovie
 
         return $this;
     }
+
+
 }

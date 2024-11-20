@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Movie;
+use App\Entity\UserMovie;
+use App\Service\MovieRatingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,6 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    private $movieRatingService;
+    function __construct(MovieRatingService $movieRatingService){
+        $this->movieRatingService = $movieRatingService;
+    }
+
     // Show the homepage with the search form
     #[Route('/', name: 'app_home')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
@@ -21,6 +28,7 @@ class HomeController extends AbstractController
         foreach ($movies as $movie) {
             $movies[] = $movie;
         }
+        $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['movie' => $movie, 'user' => $user]);
         $userRating = null;
         if ($user) {
             $query = $entityManager->createQuery(
@@ -36,6 +44,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'movies' => $entityManager->getRepository(Movie::class)->findBy([], null, 6),
             'userRating' => $userRating ? $userRating['rating'] : null,
+            'userMovie' => $userMovie,
+
         ]);
     }
 
@@ -61,15 +71,23 @@ class HomeController extends AbstractController
         })->toArray();
 
         $movies = [];
+        $movie = $entityManager->getRepository(Movie::class)->findOneBy(['id' => $myMovies]);
+        $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['movie' => $movie, 'user' => $user]);
+
+        $userRating = null;
+        if (!$userMovie == null){
+            $userRating = $userMovie->getRating();
+            $rating = (int) $request->request->get('rating');
+            $this->movieRatingService->rateMovie($movie, $user, $rating);
+            $entityManager->flush();
+        }
 
             $searchTerm = $request->get('search');
             if (is_string($searchTerm)) {
                 $movies = $entityManager->getRepository(Movie::class)
-                    ->createQueryBuilder('m')
-                    ->where('m.title LIKE :title')
-                    ->orWhere('m.year = :year')
-                    ->setParameter('title', '%' . $searchTerm . '%')
-                    ->setParameter('year', $searchTerm)
+                    ->createQueryBuilder('movie')
+                    ->where('movie.title LIKE :title')
+                    ->setParameter('title', $searchTerm . '%')
                     ->getQuery()
                     ->getResult();
             }
@@ -79,6 +97,9 @@ class HomeController extends AbstractController
             'searchTerm' => $searchTerm,
             'watchedMovies' => $watchedMovies,
             'movieList' => $movieList,
+            'userRating' => $userRating,
+            'userMovie' => $userMovie,
+
         ]);
     }
 
