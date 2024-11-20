@@ -16,9 +16,26 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
         $movies = $entityManager->getRepository(Movie::class)->findBy([], null, 6);
+        foreach ($movies as $movie) {
+            $movies[] = $movie;
+        }
+        $userRating = null;
+        if ($user) {
+            $query = $entityManager->createQuery(
+                'SELECT um.rating FROM App\Entity\UserMovie um 
+            WHERE um.user = :user AND um.movie = :movie'
+            )
+                ->setParameter('user', $user)
+                ->setParameter('movie', $movie);
+
+            $userRating = $query->getOneOrNullResult();
+        }
+
         return $this->render('home/index.html.twig', [
-            'movies' => $movies,
+            'movies' => $entityManager->getRepository(Movie::class)->findBy([], null, 6),
+            'userRating' => $userRating ? $userRating['rating'] : null,
         ]);
     }
 

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}All movies
+{% block title %}
+	All movies
 {% endblock %}
 
 {% block body %}
@@ -9,128 +10,17 @@
 		{% include 'components/headerUser.html.twig' %}
 	{% endblock %}
 
-	<h2 class="text-white pl-20 text-4xl font-extrabold mt-20">ALL MOVIES</h2>
-	<div class="pl-20 flex items-end mt-12">
-		<h3 class="text-gray-400 text-2xl font-extrabold">Sort by</h3>
-		<div class="ml-5 flex items-center space-x-3">
-			<a href="{{ path('app_movie_index') }}" class="text-orange-500 font-normal text-2xl hover:text-orange-700 underline">
-				All
-			</a>
-			<span class="text-orange-500 font-normal text-2xl">|</span>
-			<a href="{{ path('app_movie_sortedAlp') }}" class="text-orange-500 font-normal text-2xl hover:text-orange-700">
-				A-Z
-			</a>
-			<span class="text-orange-500 font-normal text-2xl">|</span>
-			<a href="{{ path('app_movie_sortedYear') }}" class="text-orange-500 font-normal text-2xl hover:text-orange-700">
-				Year
-			</a>
+	<main class="flex flex-col items-center flex-grow">
+		<div class="flex flex-wrap justify-start gap-12 pt-16 pb-10 pl-20 pr-20">
+			{% include 'components/movieList.html.twig' %}
 		</div>
-	</div>
-	<main class="flex flex-col flex-grow mt-10">
-		<div class="flex flex-wrap justify-start -mt-12 gap-12 pt-16 pb-10 pl-20 pr-20">
-			{% for movie in movies %}
-				<div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
-					<div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[35px] h-[35px]">
-						{% if movie.id in movieList %}
-							<a class="addButton" href="{{ path('add_movie_user', {'id': movie.id}) }}">
-								<img data-movie-id2="{{ movie.id }}" class="aspect-square ml-2 w-[25px] mt-[5px]" src="/img/remove-mark.svg" alt="remove from watched list">
-							</a>
-						{% else %}
-							<a class="addButton" href="{{ path('add_movie_user', {'id': movie.id}) }}">
-								<img data-movie-id2="{{ movie.id }}" class="ml-2 aspect-square w-[25px] mt-[5px]" src="/img/add.svg" alt="add to watched list">
-							</a>
-						{% endif %}
-					</div>
-					<img data-movie-id="{{ movie.id }}" class="openPop rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }}">
-					<span class="text-center font-bold group-hover:text-orange-500">
-                    {{ movie.title }}
-                </span>
-				</div>
-			{% endfor %}
-		</div>
-
-
-		<div id="overlay" class="fixed inset-0 bg-black opacity-70 hidden z-40"></div>
-		{% for movie in movies %}
-			<div id="popup-{{ movie.id }}" class="hidden fixed inset-0 flex items-center justify-center z-50 popup">
-				<div class="max-w-[50%] w-full">
-					<div class="block rounded-3xl shadow-lg bg-neutral-800">
-						<div class="g-0 lg:flex lg:flex-wrap">
-							<div class="px-4 md:px-0 lg:w-7/12 lg:order-last">
-								<div class="md:mx-6 md:p-8">
-									<div class="ml-[95%] mt-2">
-										<button id="closePop-{{ movie.id }}" class="closePop">
-											<img class="w-6 mb-[10%]" src="{{ asset('img/x.svg') }}" alt="close"/>
-										</button>
-									</div>
-									<div>
-										<p class="text-4xl font-bold text-left mt-6 mb-8 text-gray-200">{{ movie.title }}</p>
-										<div class="flex flex-row text-white text-2xl gap-12 mb-4">
-											<h3><b>{{ movie.year }} </b></h3>
-											<h3><b>{{ movie.duration }} min </b></h3>
-										</div>
-										<div>
-											<img src="{{ asset('img/stars.svg') }}" class="w-3/4 rounded-3xl mb-6" alt="stars">
-										</div>
-
-										<div class="relative mb-4">
-											<p class="text-white text-xl mb-8">{{ movie.synopsis }}</p>
-											<div class="mb-2 pb-1 pt-1 text-center">
-												<a href="{{movie.trailer}}">													<button
-															class="rounded-3xl text-lg mb-3 inline-block w-3/4 font-bold px-6 pb-2 pt-2.5 uppercase leading-normal text-white shadow-lg transition duration-150 ease-in-out hover:shadow-xl focus:shadow-xl focus:outline-none focus:ring-0 active:shadow-lg"
-															type="submit"
-															style="background: linear-gradient(to right, #ee7724, #d8363a);">
-														WATCH TRAILER
-													</button>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="flex items-center rounded-b-lg lg:w-5/12 lg:rounded-e-lg lg:rounded-bl-none">
-								<img src="{{ movie.poster }}" class="h-full w-full object-cover rounded-3xl" alt="movie poster">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-		{% block javascripts %}
-			<script>
-					const openPopupBtns = document.querySelectorAll('.openPop');
-					openPopupBtns.forEach(button => {
-						button.addEventListener('click', function() {
-							const movieId = button.getAttribute('data-movie-id');
-							const popup = document.getElementById('popup-' + movieId);
-							const overlay = document.getElementById('overlay');
-
-							popup.classList.remove('hidden');
-							popup.classList.add('flex');
-							overlay.classList.remove('hidden');
-					});
-					const closePopupBtns = document.querySelectorAll('.closePop');
-					closePopupBtns.forEach(button => {
-						button.addEventListener('click', function() {
-							const movieId = button.id.split('-')[1];
-							const popup = document.getElementById('popup-' + movieId);
-							const overlay = document.getElementById('overlay');
-
-							// Hide the popup and overlay
-							popup.classList.add('hidden');
-							popup.classList.remove('flex');
-							overlay.classList.add('hidden');
-						});
-					});
-				});
-			</script>
-		{% endblock %}
-
 
 	</main>
+
 	{% include 'components/movieCard.html.twig' %}
+
 	{% block footer %}
 		{% include 'components/footer.html.twig' %}
 	{% endblock %}
-{% endblock %}
 
+{% endblock %}
