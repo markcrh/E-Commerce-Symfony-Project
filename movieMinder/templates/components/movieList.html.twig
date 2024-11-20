@@ -1,4 +1,5 @@
-{% for movie in movies %}
+{% set sortedMovies = movies|sort((a, b) => a.title < b.title ? -1 : (a.title > b.title ? 1 : 0)) %}
+{% for movie in sortedMovies %}
     {% if movie.id in movieList %}
         <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
             <div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
@@ -9,8 +10,8 @@
             </div>
             <img data-movie-id="{{ movie.id }}" class="openPop cursor-pointer rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
             <span class="text-center font-bold group-hover:text-orange-500">
-							{{ movie.title }}
-						</span>
+                {{ movie.title }}
+            </span>
         </div>
 
     {% else %}

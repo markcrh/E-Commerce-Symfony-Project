@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Movie;
-use App\Entity\User;
 use App\Entity\UserMovie;
 use App\Form\MovieType;
 use App\Service\MovieRatingService;
@@ -12,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\MovieSearchType;
 
 #[Route('/movie')]
 class MovieController extends AbstractController
@@ -22,9 +20,9 @@ class MovieController extends AbstractController
         $this->movieRatingService = $movieRatingService;
 }
     #[Route('/', name: 'app_movie_index', methods: ['GET'])]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-
+        $url = $request->headers->get('referer');
         $user = $this->getUser();
         $movieList = $user->getMoviesId();
         $user = $this->getUser();
@@ -37,6 +35,7 @@ class MovieController extends AbstractController
         foreach ($movies as $movie) {
             $movies[] = $movie;
         }
+
         $userRating = null;
         $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['user' => $user, 'movie' => $movieList]);
 
@@ -44,55 +43,12 @@ class MovieController extends AbstractController
             'movies' => $movies = $entityManager->getRepository(Movie::class)->findAll(),
             'user' => $user,
             'userRating' => $userRating ? $userRating['rating'] : null,
-            'movieList' => $movieList
-        ]);
-    }
-
-#[Route('/sortedAlp', name: 'app_movie_sortedAlp', methods: ['GET'])]
-    public function sortedAlp(MovieRepository $movieRepository): Response
-    {
-        $user = $this->getUser();
-        $movieList = $user->getMoviesId();
-        $movies = $movieRepository->findAll();
-        $sortedByTitle = $this->sortByTitle($movies);
-
-        return $this->render('movie/indexSortedAlp.html.twig', [
-            'moviesByTitle' => $sortedByTitle,
             'movieList' => $movieList,
-            'movies' => $movies,
+            'userMovie' => $userMovie,
+            'url' => $url,
         ]);
     }
 
-    #[Route('/sortedYear', name: 'app_movie_sortedYear', methods: ['GET'])]
-    public function sortedYear(MovieRepository $movieRepository): Response
-    {
-        $user = $this->getUser();
-        $movieList = $user->getMoviesId();
-        $movies = $movieRepository->findAll();
-        $sortedByYear = $this->sortByYear($movies);
-
-        return $this->render('movie/indexSortedYear.html.twig', [
-            'moviesByYear' => $sortedByYear,
-            'movieList' => $movieList,
-            'movies' => $movies,
-        ]);
-    }
-    private function sortByYear($movies)
-    {
-        usort($movies, function($a, $b) {
-            return $b->getYear() <=> $a->getYear();  // Use <=> for comparison
-        });
-        return $movies;
-    }
-
-    // Sort movies alphabetically by title
-    private function sortByTitle($movies)
-    {
-        usort($movies, function($a, $b) {
-            return strcmp($a->getTitle(), $b->getTitle());  // String comparison
-        });
-        return $movies;
-    }
 
 
     #[Route('/add/{id}', name: 'add_movie_user', methods: ['GET', 'POST'])]
@@ -199,7 +155,6 @@ class MovieController extends AbstractController
     #[Route('/{id}/rate', name: 'app_movie_rate', methods: ['POST'])]
     public function rateMovie(int $id, Request $request, EntityManagerInterface $entityManager)
     {
-        dd($request);
         $url = $request->headers->get('referer');
         $user = $this->getUser();
         if (!$user) {
