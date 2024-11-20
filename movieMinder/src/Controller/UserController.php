@@ -44,17 +44,21 @@ class UserController extends AbstractController
         })->toArray();
 
         $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['movie' => $movie, 'user' => $user]);
-        $userRating = $userMovie->getRating();
 
+        $userRating = null;
+        if (!$userMovie == null){
+        $userRating = $userMovie->getRating();
         $rating = (int) $request->request->get('rating');
         $this->movieRatingService->rateMovie($movie, $user, $rating);
         $entityManager->flush();
-        
+        }
+
         return $this->render('dashboard/dashboard.html.twig', [
             'movies' => $movies,
             'watchedMovies' => $watchedMovies,
             'myMovies' => $myMovies,
             'userRating' => $userRating,
+            'userMovie' => $userMovie,
         ]);
     }
 
@@ -72,16 +76,20 @@ class UserController extends AbstractController
 
         $movie = $entityManager->getRepository(Movie::class)->findOneBy(['id' => $myMovies]);
         $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['movie' => $movie, 'user' => $user]);
+        $userRating = null;
+        if (!$userMovie == null){
         $userRating = $userMovie->getRating();
-
         $rating = (int) $request->request->get('rating');
         $this->movieRatingService->rateMovie($movie, $user, $rating);
         $entityManager->flush();
+    }
 
         return $this->render('user/user_movie_list.html.twig', [
             'movies' => $movies,
             'watchedMovies' => $watchedMovies,
             'userRating' => $userRating,
+            'userMovie' => $userMovie,
+
 
         ]);
     }

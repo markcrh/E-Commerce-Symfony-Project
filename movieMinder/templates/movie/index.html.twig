@@ -11,13 +11,13 @@
 	{% endblock %}
 
 	<main class="flex flex-col items-center flex-grow">
-		<div class="flex flex-wrap justify-start gap-12 pt-16 pb-10 pl-20 pr-20">
+		<div class="flex flex-wrap justify-start -mt-12 gap-12 pt-16 pb-10 pl-20 pr-20">
 			{% include 'components/movieList.html.twig' %}
 		</div>
 
-	</main>
-
 	{% include 'components/movieCard.html.twig' %}
+
+	</main>
 
 	{% block footer %}
 		{% include 'components/footer.html.twig' %}
