@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    MovieMinder
+{% endblock %}
+
+
+{% block body %}
+
+    <main class="flex flex-col flex-grow">
+
+        {% block header %}
+            {% include 'components/header.html.twig' %}
+        {% endblock %}
+        <div class="flex flex-col items-center p-32">
+        <h1 class="text-9xl lg:text-[350px] text-white text-center">404</h1>
+        <h2 class="text-gray-200 text-5xl text-center">We can't find the page you're looking for</h2>
+            <a href="{{ path('app_home') }}"
+               class="mt-16 sm:w-3/4 rounded-3xl text-center text-xl mb-3 inline-block md:w-1/6 font-bold px-6 pb-2 pt-2.5 uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+               style="background: linear-gradient(to right, #ee7724, #d8363a);">
+                GO TO HOMEPAGE
+            </a>
+        </div>
+    {% block footer %}
+        {% include 'components/footer.html.twig' %}
+    {% endblock %}
+
+{% endblock %}

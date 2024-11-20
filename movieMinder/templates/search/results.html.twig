@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {% block header %}
+        {% include 'components/headerUser.html.twig' %}
+    {% endblock %}
+
+    <main class="flex flex-col flex-grow">
+
+    <div class="flex flex-col pt-10 pl-16 pr-16 pb-16 gap-20">
+        <h2 class="font-bold text-3xl text-gray-300">SEARCH RESULTS FOR <span class="text-white">"{{ searchTerm }}"</span></h2>
+
+        
+            <div class="flex flex-wrap justify-center flex-grow w-full gap-6 ">
+                {% for movie in movies %}
+                    <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
+                        <div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[35px] h-[35px]">
+                            {% if movie.id in movieList %}
+                                <a class="addButton" href="{{ path('add_movie_user', {'id': movie.id}) }}">
+                                    <img data-movie-id2="{{ movie.id }}" class="aspect-square ml-2 w-[25px] mt-[5px]" src="/img/remove-mark.svg" alt="remove from watched list">
+                                </a>
+                            {% else %}
+                                <a class="addButton" href="{{ path('add_movie_user', {'id': movie.id}) }}">
+                                    <img data-movie-id2="{{ movie.id }}" class="ml-2 aspect-square w-[25px] mt-[5px]" src="/img/add.svg" alt="add to watched list">
+                                </a>
+                            {% endif %}
+                        </div>
+                        <img data-movie-id="{{ movie.id }}" class="openPop rounded-md w-[200px] h-[300px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500 bg-cover"
+                             src="{{ movie.poster }}" alt="{{ movie.title }}">
+                        <span class="text-center font-bold group-hover:text-orange-500"> {{ movie.title }} </span>
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+        </main>
+        {% include 'components/movieCard.html.twig' %}
+        {% block footer %}
+            {% include 'components/footer.html.twig' %}
+        {% endblock %}
+        {% endblock %}
+
+

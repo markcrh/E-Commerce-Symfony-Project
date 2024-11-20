@@ -3,17 +3,79 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    {% block header %}
+        {% include 'components/header.html.twig' %}
+    {% endblock %}
 
-    {{ form_errors(registrationForm) }}
+            <div class="flex flex-wrap items-center justify-center text-neutral-200 mt-[4%] mb-[4%]">
+                <div class="max-w-4/6">
+                    <div class="block rounded-3xl bg-neutral-800 shadow-lg">
+                        <div class="g-0 lg:flex lg:flex-wrap">
+                            <div class="px-4 md:px-0 lg:w-6/12">
+                                <div class="md:mx-6 md:p-8">
+                                    <div class="text-center">
+                                        <img
+                                                class="mx-auto w-2/12 mb-[4%]"
+                                                src="{{ asset('img/logoNoText.svg') }}"
+                                                alt="logo" />
+                                    </div>
+                                    <form method="post">
+                                        <p class="text-3xl font-bold mb-4">Create an account for free</p>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                                        <div class="relative mb-4" data-twe-input-wrapper-init>
+                                            {{ form_row(registrationForm.username, {
+                                                'attr': {'class': 'peer block min-h-[auto] w-full rounded border-0 bg-white px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary dark:text-black dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary'}
+                                            }) }}
+                                        </div>
+                                        <div class="relative mb-4" data-twe-input-wrapper-init>
+                                            {{ form_row(registrationForm.email, {
+                                                'attr': {'class': 'peer block min-h-[auto] w-full rounded border-0 bg-white px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary dark:text-black dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary'}
+                                            }) }}
+                                        </div>
+                                        <div class="relative mb-4" data-twe-input-wrapper-init>
+                                            {{ form_row(registrationForm.plainPassword, {
+                                                label: 'Password',
+                                                'attr': {'class': 'peer block min-h-[auto] w-full rounded border-0 bg-white px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary dark:text-black dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary'}
+                                            }) }}
+                                        </div>
+                                        <div class="relative mb-4">
+                                            {{ form_row(registrationForm.agreeTerms, {
+                                                'attr': {'class': 'bg-transparent border-gray-300'}
+                                            }) }}
+                                        </div>
+                                        <div class="mb-2 pb-1 pt-1 text-center">
+                                            <button
+                                                    class=" bg-gradient-to-r from-[#fc5400] to-[#f18100] rounded-3xl text-xl mb-3 inline-block w-full font-bold px-6 pb-2 pt-2.5 uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:text-gray-200 hover:bg-gradient-to-t from-orange-500 via-orange-600 to-orange-700"
+                                                    type="submit">
+                                                SIGN UP
+                                            </button>
+                                        </div>
+                                        <div class="flex flex-col items-center">
+                                            <h2>or</h2>
+                                            <h2>Sign up with</h2>
+                                            <img src="{{ asset('img/loginIcons.svg') }}"  class="h-22 mt-4 object-cover rounded-3xl" alt="MovieMinder Logo">
+                                        </div>
+                                        <div class="flex flex-row items-center mt-9">
+                                            <p class="mb-0  me-2">Already have an account?</p>
+                                            <a href="{{path('app_login')}}">
+                                            <button type="button" class="text-orange-600 rounded-3xl inline-block px-1 pb-[6px] pt-2 text-xl font-bold  active:border-danger-700 active:text-danger-700 dark:hover:bg-rose-950 dark:focus:bg-rose-950">
+                                                Login
+                                            </button>
+                                            </a>
+                                        </div>
+                                        {{ form_end(registrationForm) }}
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-e-lg lg:rounded-bl-none">
+                            <img src="{{ asset('img/signup.svg') }}"  class="h-full w-full object-cover rounded-3xl" alt="MovieMinder Logo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    {% block footer %}
+        {% include 'components/footer.html.twig' %}
+    {% endblock %}
 {% endblock %}

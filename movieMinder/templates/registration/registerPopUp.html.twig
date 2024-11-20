@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% block header %}
+        {% include 'components/header.html.twig' %}
+    {% endblock %}
+    <div class="flex flex-wrap items-center justify-center text-neutral-800 mt-[4%] mb-[4%]">
+        <div class="max-w-[53%] w-full">
+            <div class="block rounded-3xl shadow-lg bg-neutral-800">
+                <div class="g-0 lg:flex lg:flex-wrap">
+                    <div class="px-4 md:px-0 lg:w-6/12 lg:order-first">
+                        <div class="md:mx-6 md:p-8">
+                            <div class="text-center mt-6">
+                                <img
+                                        class="mx-auto w-1/6 mb-[6%]"
+                                        src="{{ asset('img/logoNoText.svg') }}"
+                                        alt="logo"
+                                />
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-center mb-8 text-neutral-200">Sign up for free to start tracking your favourite movies and shows</p>
+
+                                <div class="relative mb-4" data-twe-input-wrapper-init>
+                                    <ul class="list-disc pl-5 mb-10 text-neutral-200">
+                                        <li class="mb-4">Track which episodes of a TV show or movies you have watched, including season and episode numbers.</li>
+                                        <li class="mb-4">Keep a list of movies or TV shows that you want to watch in the future.</li>
+                                        <li class="mb-4">Get a breakdown of genres, ratings, or viewing trends, such as how much time you've spent on different types of content.</li>
+                                    </ul>
+                                    <div class="mb-2 pb-1 pt-1 text-center">
+                                        <a href="{{ path('app_register') }}">
+                                        <button
+                                                class="w-3/4 bg-gradient-to-r from-[#fc5400] to-[#f18100] rounded-3xl text-xl mb-3 inline-block font-bold px-6 pb-2 pt-2.5 uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:text-gray-200 hover:bg-gradient-to-t from-orange-500 via-orange-600 to-orange-700"
+                                                type="submit">
+                                            SIGN UP
+                                        </button>
+                                        </a>
+                                    </div>
+                                    <div class="mb-2 pb-1 pt-1 text-center">
+                                        <a href="{{ path('app_login') }}">
+                                        <button
+                                                class="bg-transparent text-orange-600 rounded-3xl text-lg mb-3 inline-block w-3/4 font-bold px-6 pb-2 pt-2.5 border-2 border-orange-600 hover:text-gray-200 hover:bg-gradient-to-t from-orange-500 via-orange-600 to-orange-700"
+                                                type="submit">
+                                            LOG IN
+                                        </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-e-lg lg:rounded-bl-none">
+                        <img src="{{ asset('img/posters.svg') }}" class="h-full w-full object-cover rounded-3xl" alt="MovieMinder Logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    {% block footer %}
+        {% include 'components/footer.html.twig' %}
+    {% endblock %}
+    {% endblock %}

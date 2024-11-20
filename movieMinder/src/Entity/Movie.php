@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MovieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,8 +28,8 @@ class Movie
     #[ORM\Column(type: Types::TEXT)]
     private ?string $synopsis = null;
 
-    #[ORM\Column]
-    private ?int $genres_id = null;
+    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'genres')]
+    private ?Collection $genres;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $poster = null;
@@ -36,13 +38,19 @@ class Movie
     private ?string $trailer = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $rating = null;
+    private ?float $rating = null;
 
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $platforms = null;
 
-    #[ORM\Column(length: 255)]
-    private ?bool $watched = false;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'watched_movies')]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->genres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -97,15 +105,16 @@ class Movie
         return $this;
     }
 
-    public function getGenresId(): ?int
+    public function getGenres(): Collection
     {
-        return $this->genres_id;
+        return $this->genres;
     }
 
-    public function setGenresId(int $genres_id): static
+    public function addGenre(Genre $genre): static
     {
-        $this->genres_id = $genres_id;
-
+        if (!$this->genres->contains($genre)) {
+            $this->genres->add($genre);
+        }
         return $this;
     }
 
@@ -157,14 +166,38 @@ class Movie
         return $this;
     }
 
-    public function getwatched(): ?string
+    public function getUser(): ?User
     {
-        return $this->watched;
+        return $this->user;
     }
 
-    public function setwatched(bool $watched): static
+    public function setUser(?User $user): static
     {
-        $this->watched = $watched;
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addWatchedMovie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeWatchedMovie($this);
+        }
 
         return $this;
     }
