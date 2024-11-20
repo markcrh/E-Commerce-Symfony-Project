@@ -38,7 +38,7 @@ class Movie
     private ?string $trailer = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $rating = null;
+    private ?float $rating = null;
 
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $platforms = null;
@@ -178,9 +178,6 @@ class Movie
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
     public function getUsers(): Collection
     {
         return $this->users;
