@@ -49,14 +49,22 @@ class HomeController extends AbstractController
 
 
     #[Route('/search', name: 'app_movie_search', methods: ['GET'])]
-    public function search(Request $request, EntityManagerInterface $em): Response
+    public function search(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        $myMovies = $user->getMoviesId();
+        $movieList = $user->getMoviesId();
+        $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null,);
+        $watched = $user->getWatchedMovies();
+        $watchedMovies = $watched->map( function (Movie $movie) {
+            return $movie->getId();
+        })->toArray();
 
         $movies = [];
 
             $searchTerm = $request->get('search');
             if (is_string($searchTerm)) {
-                $movies = $em->getRepository(Movie::class)
+                $movies = $entityManager->getRepository(Movie::class)
                     ->createQueryBuilder('m')
                     ->where('m.title LIKE :title')
                     ->orWhere('m.year = :year')
@@ -69,6 +77,8 @@ class HomeController extends AbstractController
         return $this->render('search/results.html.twig', [
             'movies' => $movies,
             'searchTerm' => $searchTerm,
+            'watchedMovies' => $watchedMovies,
+            'movieList' => $movieList,
         ]);
     }
 
