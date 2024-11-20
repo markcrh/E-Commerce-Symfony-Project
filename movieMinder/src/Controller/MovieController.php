@@ -2,12 +2,8 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Genre;
 use App\Entity\Movie;
 use App\Form\MovieType;
-use App\Repository\MovieRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,10 +21,7 @@ class MovieController extends AbstractController
         $movieList = $user->getMoviesId();
         $movies = $entityManager->getRepository(Movie::class)->findAll();
         foreach ($movies as $movie) {
-            $movieGenres = $movie->getGenres();
-            foreach ($movieGenres as $genre) {
-                $movie->genresName[] = $genre->getName();
-            }
+            $movies[] = $movie;
         }
 
         $userRating = null;
@@ -46,10 +39,10 @@ class MovieController extends AbstractController
         $this->updateMovieRating($movie, $entityManager);
 
         return $this->render('movie/index.html.twig', [
-            'movies' => $entityManager->getRepository(Movie::class)->findAll(),
+            'movies' => $movies = $entityManager->getRepository(Movie::class)->findAll(),
             'user' => $user,
             'userRating' => $userRating ? $userRating['rating'] : null,
-            'movieList' => $movieList,
+            'movieList' => $movieList
         ]);
     }
 
