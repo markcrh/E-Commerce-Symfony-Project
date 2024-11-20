@@ -30,6 +30,14 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/about', name: 'app_about')]
+    public function about(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('about/about.html.twig', [
+
+        ]);
+    }
+
 
     #[Route('/search', name: 'app_movie_search', methods: ['GET'])]
     public function search(Request $request, EntityManagerInterface $entityManager): Response
