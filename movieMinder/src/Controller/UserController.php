@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Movie;
 use App\Entity\User;
+use App\Entity\UserMovie;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\MovieRatingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,9 +15,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\MovieRepository;
 
+
 #[Route('/user')]
 class UserController extends AbstractController
 {
+    private $movieRatingService;
+    function __construct(MovieRatingService $movieRatingService){
+        $this->movieRatingService = $movieRatingService;
+    }
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
@@ -25,55 +32,33 @@ class UserController extends AbstractController
     }
 
     #[Route('/dashboard', name: 'user_dashboard', methods: ['GET'])]
-    public function userDashboard( EntityManagerInterface $entityManager): Response
+    public function userDashboard(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
         $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null, 8);
+        $movie = $entityManager->getRepository(Movie::class)->findOneBy(['id' => $myMovies]);
         $watched = $user->getWatchedMovies();
         $watchedMovies = $watched->map( function (Movie $movie) {
             return $movie->getId();
         })->toArray();
 
-        $userRating = null;
-        if ($user) {
-            $query = $entityManager->createQuery(
-                'SELECT um.rating FROM App\Entity\UserMovie um 
-            WHERE um.user = :user AND um.movie = :movie'
-            )
-                ->setParameter('user', $user)
-                ->setParameter('movie', $movies);
+        $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['movie' => $movie, 'user' => $user]);
+        $userRating = $userMovie->getRating();
 
-            $userRating = $query->getOneOrNullResult();
-        }
+        $rating = (int) $request->request->get('rating');
+        $this->movieRatingService->rateMovie($movie, $user, $rating);
+        $entityManager->flush();
         
         return $this->render('dashboard/dashboard.html.twig', [
             'movies' => $movies,
             'watchedMovies' => $watchedMovies,
             'myMovies' => $myMovies,
-            'userRating' => $userRating ? $userRating['rating'] : null,
+            'userRating' => $userRating,
         ]);
     }
 
-    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
-            
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-        
-        return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
+
     #[Route('/mymovies', name:'show_list', methods: ['GET'])]
     public function getList(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -85,22 +70,38 @@ class UserController extends AbstractController
             return $movie->getId();
         })->toArray();
 
-        $userRating = null;
-        if ($user) {
-            $query = $entityManager->createQuery(
-                'SELECT um.rating FROM App\Entity\UserMovie um 
-            WHERE um.user = :user AND um.movie = :movie'
-            )
-                ->setParameter('user', $user)
-                ->setParameter('movie', $movies);
+        $movie = $entityManager->getRepository(Movie::class)->findOneBy(['id' => $myMovies]);
+        $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['movie' => $movie, 'user' => $user]);
+        $userRating = $userMovie->getRating();
 
-            $userRating = $query->getOneOrNullResult();
-        }
+        $rating = (int) $request->request->get('rating');
+        $this->movieRatingService->rateMovie($movie, $user, $rating);
+        $entityManager->flush();
 
         return $this->render('user/user_movie_list.html.twig', [
             'movies' => $movies,
             'watchedMovies' => $watchedMovies,
-            'userRating' => $userRating ? $userRating['rating'] : null
+            'userRating' => $userRating,
+
+        ]);
+    }
+    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('user/new.html.twig', [
+            'user' => $user,
+            'form' => $form,
         ]);
     }
     #[Route('/profile', name: 'app_user_profile', methods: ['GET'])]
