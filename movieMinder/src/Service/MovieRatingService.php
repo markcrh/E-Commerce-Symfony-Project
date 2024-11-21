@@ -17,12 +17,13 @@ class MovieRatingService
 
     public function rateMovie(Movie $movie, User $user, int $rating) : void
     {
-        $userMovie = $this->entityManager->getRepository(UserMovie::class)->findOneBy(['movie' => $movie, 'user' => $user]);
+        $userMovie = $this->entityManager->getRepository(UserMovie::class)->find(['movie' => $movie, 'user' => $user]);
 
         if (!$userMovie) {
             $userMovie = new UserMovie();
             $userMovie->setMovie($movie);
             $userMovie->setUser($user);
+            $userMovie->setRating(0);
         }
 
         $userMovie->setRating($rating);
@@ -39,6 +40,7 @@ class MovieRatingService
 
         $averageRating = $totalMovies > 0 ? $globalRating / $totalMovies : 0;
         $movie->setRating($averageRating);
+        $this->entityManager->persist($movie);
         $this->entityManager->flush();
     }
 }
