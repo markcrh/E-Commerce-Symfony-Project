@@ -18,7 +18,7 @@
             {% include 'components/headerUser.html.twig' %}
         {% endblock %}
 
-        <div class="flex flex-col w-full h-auto gap-14 pt-28 pl-32 pr-32 pb-10">
+        <div class="flex flex-col w-full h-auto gap-14 pt-20 pl-32 pr-32 pb-10">
             <div class="flex flex-wrap items-center justify-center text-neutral-200">
                 <div class="max-w-4/6 w-full block rounded-3xl bg-neutral-800 shadow-lg">
                     <div class="lg:flex">
@@ -50,13 +50,13 @@
                 {% endif %}
             {% endfor %}
             <div class="flex flex-wrap justify-center gap-14">
-                <div class="flex flex-col justify-center text-center items-center gap-8 rounded-3xl border-4 border-orange-500 p-8 max-w-82 flex-1">
-                    <h2 class="text-gray-400 text-2xl font-extrabold">MOVIES WATCHED</h2>
-                    <h3 class="text-white text-4xl"> {{ watchedMovieCount | default(0) }}  </h3>
+                <div class="flex flex-col justify-center text-center items-center gap-8 rounded-3xl border-4 border-orange-500 p-8 flex-1">
+                    <h2 class="text-gray-400 text-3xl font-extrabold">MOVIES WATCHED</h2>
+                    <h3 class="text-white text-6xl"> {{ watchedMovieCount | default(0) }}  </h3>
                 </div>
                 <div class="flex flex-col justify-center text-center items-center gap-8 rounded-3xl border-4 border-orange-500 p-8 max-w-82 flex-1">
-                    <h2 class="text-gray-400 text-2xl font-extrabold">MOVIE TIME</h2>
-                    <h3 class="text-white text-4xl">
+                  <h2 class="text-gray-400 text-3xl font-extrabold">MOVIE TIME</h2>
+                    <h3 class="text-white text-6xl">
                         {% if days > 0 %}
                             {{ days }}d
                             {% if hours > 0 or minutes > 0 %} {% endif %}
@@ -70,14 +70,6 @@
                             {{ minutes }}m
                         {% endif %}
                     </h3>
-                </div>
-                <div class="flex flex-col justify-center text-center items-center gap-8 rounded-3xl border-4 border-orange-500 p-8 max-w-82 flex-1">
-                    <h2 class="text-gray-400 text-2xl font-extrabold">EPISODES WATCHED</h2>
-                    <h3 class="text-white text-4xl"> 7 </h3>
-                </div>
-                <div class="flex flex-col justify-center text-center items-center gap-8 rounded-3xl border-4 border-orange-500 p-8 max-w-82 flex-1">
-                    <h2 class="text-gray-400 text-2xl font-extrabold">SERIES TIME</h2>
-                    <h3 class="text-white text-4xl"> 2d 14h 45m </h3>
                 </div>
             </div>
         </div>

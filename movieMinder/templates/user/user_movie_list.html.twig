@@ -1,85 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}My Movies
+{% block title %}
+    My Movies
 {% endblock %}
 
 
 {% block body %}
 
-    <div class="flex flex-col flex-grow">
+    {% block header %}
+        {% include 'components/headerUser.html.twig' %}
+    {% endblock %}
 
-        {% block header %}
-            {% include 'components/headerUser.html.twig' %}
-        {% endblock %}
+    <main class="flex flex-col flex-grow">
 
-        <div class="flex flex-col justify-center w-full h-auto gap-10 pt-20 pb-16 pl-32 pr-32">
-            <h2 class="text-5xl text-white font-extrabold mb-10">MY MOVIES</h2>
-
-            <h2 class="text-3xl text-gray-400 font-extrabold">PENDING</h2>
-            {% if movies is empty %}
-            <div class="flex flex-col justify-center items-center gap-6">
-                <h2 class="text-white text-2xl font-bold text-center">Your list is empty</h2>
-                <a href="{{ path('app_movie_index') }}" class="flex flew row items-center text-white font-extrabold rounded-2xl text-2xl px-4 py-2 text-center gap-4 border-2 border-orange-500">
-                    <h3>ADD MOVIES</h3>
-                    <img class="aspect-square w-[30px] group-hover:hidden"
-                         src="/img/addIcon.png" alt="add to list">
+        <div class="flex flex-col justify-center w-full h-auto gap-10 pt-20 pb-16 pl-24 pr-22">
+            <h2 class="text-4xl text-white font-extrabold mb-2">MY MOVIES</h2>
+            <div class="flex flex-row gap-6">
+            <h2 class="text-2xl font-extrabold bg-transparent w-[13%] text-center text-orange-600 rounded-3xl border-2 border-orange-600 p-2">PENDING</h2>
+                <a href="{{ path('user_dashboard') }}" class="text-2xl font-extrabold bg-transparent w-[13%] text-center text-gray-400 rounded-3xl border-2 border-gray-400 p-2 hover:text-orange-600 hover:border-orange-600">WATCHED
                 </a>
-        {% else %}
-            <div class="flex flex-wrap justify-left gap-5">
-                {% for movie in movies %}
-                    {% if movie.id not in watchedMovies %}
-                        <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
-                            <div class="absolute hidden group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
-                                <a href="{{ path('mymovies_add_watched', {'movieId': movie.id}) }}">
-                                    <img class="aspect-square w-[30px]" src="/img/not-watched-mark.svg" alt="add to list">
-                                </a>
-                            </div>
-                            <img class="rounded-md w-[200px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500" src="{{ movie.poster }}" alt="{{ movie.title }} ">
-                            <span class="text-center font-bold group-hover:text-orange-500"> {{ movie.title }} </span>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-                {% endif %}
-
-            </div>
-            <h2 class="text-3xl text-gray-400 font-extrabold">WATCHED</h2>
-            {% if watchedMovies is empty %}
-            <div class="flex flex-col justify-center items-center gap-6">
-                <h2 class="text-white text-2xl font-bold text-center">Your list is empty</h2>
-                <a href="{{ path('app_movie_index') }}" class="flex flew row items-center text-white font-extrabold rounded-2xl text-2xl px-4 py-2 text-center gap-4 border-2 border-orange-500">
-                    <h3>ADD MOVIES</h3>
-                    <img class="aspect-square w-[30px] group-hover:hidden"
-                         src="/img/addIcon.png" alt="add to list">
-                </a>
-            </div>
-            {% else %}
-            <div class="flex flex-wrap justify-left gap-5">
-                {% for movie in movies %}
-                    {% if movie.id in watchedMovies %}
-                        <div class="group relative flex flex-col text-white w-[200px] h-full gap-2.5">
-                            <div class="absolute group-hover:flex justify-center items-center self-end mr-1.5 w-[30px] h-[40px]">
-                                <img class="aspect-square w-[30px] mt-[5px] group-hover:hidden"
-                                     src="/img/watched-mark.svg" alt="add to list">
-                                <a href="{{ path('mymovies_add_watched', {'movieId': movie.id}) }}">
-                                    <img class="aspect-square w-[30px] hidden group-hover:block"
-                                         src="/img/not-watched-mark.svg" alt="add to list">
-                                </a>
-                            </div>
-                            <img data-movie-id="{{ movie.id }}"
-                                 class="openPop rounded-md w-[200px] group-hover:outline group-hover:outline-offset-0 group-hover:outline-orange-500"
-                                 src="{{ movie.poster }}" alt="{{ movie.title }}">
-                            <span class="text-center font-bold group-hover:text-orange-500">{{ movie.title }}</span>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-                {% endif %}
-
-            </div>
-            </div>
         </div>
+            {% include 'components/userWatchMovieList.html.twig' %}
         </div>
-        {% block footer %}
-            {% include 'components/footer.html.twig' %}
-        {% endblock %}
-    </div>
+
+    {% include 'components/movieCard.html.twig' %}
+
+    </main>
+
+    {% block footer %}
+        {% include 'components/footer.html.twig' %}
+    {% endblock %}
+
 {% endblock %}

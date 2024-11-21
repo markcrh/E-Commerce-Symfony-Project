@@ -38,13 +38,10 @@ class Movie
     private ?string $trailer = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $rating = null;
+    private ?float $rating = null;
 
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $platforms = null;
-
-    #[ORM\Column(length: 255)]
-    private ?bool $watched = false;
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'watched_movies')]
     private Collection $users;
@@ -169,18 +166,6 @@ class Movie
         return $this;
     }
 
-    public function getwatched()
-    {
-        return $this->watched;
-    }
-
-    public function setwatched(bool $watched)
-    {
-        $this->watched = $watched;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -193,9 +178,6 @@ class Movie
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
     public function getUsers(): Collection
     {
         return $this->users;
@@ -215,6 +197,7 @@ class Movie
     {
         if ($this->users->removeElement($user)) {
             $user->removeWatchedMovie($this);
+            $this->setRating(0);
         }
 
         return $this;

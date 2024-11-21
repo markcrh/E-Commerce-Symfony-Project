@@ -1,0 +1,102 @@
+
+<div id="overlay" class="fixed inset-0 bg-black opacity-70 hidden z-40"></div>
+{% for movie in movies %}
+    {% set genresNames = [] %}
+    {% for genre in movie.getGenres() %}
+        {% set genresNames = genresNames|merge([genre.getName()]) %}
+    {% endfor %}
+    <div id="popup-{{ movie.id }}" class="hidden fixed inset-0 flex items-center justify-center z-50 popup">
+        <div class="max-w-[50%] w-full">
+            <div class="block rounded-3xl shadow-lg bg-neutral-800">
+                <div class="g-0 lg:flex lg:flex-wrap">
+                    <div class="px-4 md:px-0 lg:w-7/12 lg:order-last">
+                        <div class="md:mx-6 md:p-8">
+                            <div class="ml-[95%] mt-2">
+                                <button id="closePop-{{ movie.id }}" class="closePop">
+                                    <img class="w-6 mb-[10%]" src="{{ asset('img/x.svg') }}" alt="close"/>
+                                </button>
+                            </div>
+                            <div>
+                                <p class="text-4xl font-bold text-left mt-6 mb-8 text-gray-200">{{ movie.title }}</p>
+                                <div class="flex flex-row text-white text-2xl gap-12 mb-4">
+                                    <h2><b>{{ movie.year }} </b></h2>
+                                    <h2><b>{{ movie.duration }} min </b></h2>
+                                </div>
+                                <div class="flex flex-row text-white text-2xl gap-12 mb-4">
+                                    <h2><b>{{ genresNames[0] }}/{{ genresNames[1] }} </b></h2>
+                                </div>
+
+                                <div class="relative mb-4">
+                                    <p class="text-white text-xl mb-8">{{ movie.synopsis }}</p>
+
+                                    <div class="mt-4">
+                                        <h3 class="mt-2 text-xl">Rating total:{{movie.rating}}</h3>
+                                    </div>
+
+                                        {% for element in allUserMovies %}
+                                            {% if (movie.id == element.movie.id and url == "http://127.0.0.1:8000/user/mymovies") %}
+                                                <h3 class="mt-4 text-lg">Rate this movie:</h3>
+                                                <form action="{{ path('app_movie_rate', {'id': movie.id}) }}" method="POST" class="mt-2">
+                                                    <label for="rating" class="mr-2">Your rating (1-10):</label>
+                                                    <input type="number" id="rating" name="rating" min="1" max="10" required class="p-2 border border-gray-300 rounded-md text-black bg-white" value="{{ userRating is not null ? userRating : '' }}">
+                                                    <button type="submit" class="ml-2 bg-orange-500 text-black p-2 rounded-md">Submit Rating</button>
+                                                </form>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    <div class="mb-2 pb-1 pt-1 text-center">
+                                        <a href="{{ path('app_register') }}">
+                                            <button
+                                                    class="rounded-3xl text-lg mb-3 inline-block w-3/4 font-bold px-6 pb-2 pt-2.5 uppercase leading-normal text-white shadow-lg transition duration-150 ease-in-out hover:shadow-xl focus:shadow-xl focus:outline-none focus:ring-0 active:shadow-lg"
+                                                    type="submit"
+                                                    style="background: linear-gradient(to right, #ee7724, #d8363a);">
+                                                WATCH TRAILER
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center rounded-b-lg lg:w-5/12 lg:rounded-e-lg lg:rounded-bl-none">
+                        <img src="{{ movie.poster }}" class="h-full w-full object-cover rounded-3xl" alt="movie poster">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Open popup logic
+            const openPopupBtns = document.querySelectorAll('.openPop');
+            openPopupBtns.forEach(button => {
+                button.addEventListener('click', function() {
+                    const movieId = button.getAttribute('data-movie-id');
+                    const popup = document.getElementById('popup-' + movieId);
+                    const overlay = document.getElementById('overlay');
+
+                    // Show the popup and overlay
+                    popup.classList.remove('hidden');  // Show the popup
+                    popup.classList.add('flex');       // Apply flexbox
+                    overlay.classList.remove('hidden'); // Show the overlay
+                });
+            });
+            const closePopupBtns = document.querySelectorAll('.closePop');
+            closePopupBtns.forEach(button => {
+                button.addEventListener('click', function() {
+                    const movieId = button.id.split('-')[1];
+                    const popup = document.getElementById('popup-' + movieId);
+                    const overlay = document.getElementById('overlay');
+
+                    // Hide the popup and overlay
+                    popup.classList.add('hidden');  // Hide the popup
+                    popup.classList.remove('flex'); // Remove flexbox layout
+                    overlay.classList.add('hidden'); // Hide the overlay
+                });
+            });
+        });
+    </script>
+{% endblock %}
