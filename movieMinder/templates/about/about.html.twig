@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+    <main class="flex flex-col flex-grow">
+        {% block header %}
+            {% include 'components/header.html.twig' %}
+        {% endblock %}
+<section class="flex justify-center h-max-[750px]">
+        <div class="flex flex-col md:flex-row justify-center text-center w-10/12 mt-24">
+            <div class="bg-neutral-800 border-2 border-neutral-800 p-10 rounded-3xl lg:w-2/6 w-full pr-20">
+                <h1 class="text-orange-500 text-3xl mt-6 mb-6 font-extrabold">ORGANIZE YOUR MOVIES</h1>
+                <h2 class="text-gray-300 text-center text-2xl">We help you keep track of what you've watched and what’s still on your
+                    to-watch list for the future</h2>
+                <div class="" data-twe-input-wrapper-init>
+                    <p class="mt-12 text-2xl text-left font-bold text-orange-500">Sign up for free to start tracking your
+                        favourite movies and shows</p>
+                    <div class="text-neutral-200 text-lg text-justify mt-4">
+                        <ul class="list-disc ml-6 ">
+                            <li class="mb-4 ">Keep a list of movies that you want to watch in the future.
+                            </li>
+                            <li class="mb-4">Get a breakdown of genres, ratings, or viewing trends, such as how much
+                                time you've spent on different types of content.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center w-full md:w-4/6 mt-8 md:mt-0">
+                <img src="{{ asset('img/about.gif') }}" class="w-full rounded-3xl border-2 border-orange-500 -ml-14">
+            </div>
+        </div>
+        </section>
+    </main>
+
+    {% block footer %}
+        {% include 'components/footer.html.twig' %}
+    {% endblock %}
+{% endblock %}
+

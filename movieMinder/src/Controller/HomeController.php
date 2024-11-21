@@ -23,6 +23,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $url = $request->headers->get('referer');
         $user = $this->getUser();
         $movies = $entityManager->getRepository(Movie::class)->findBy([], null, 6);
         foreach ($movies as $movie) {
@@ -47,6 +48,7 @@ class HomeController extends AbstractController
             'userRating' => $userRating ? $userRating['rating'] : null,
             'userMovie' => $userMovie,
             'allUserMovies' => $allUserMovies,
+            'url' => $url,
 
         ]);
     }
@@ -59,6 +61,14 @@ class HomeController extends AbstractController
         ]);
     }
 
+
+    #[Route('/about', name: 'app_about')]
+    public function about(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('about/about.html.twig', [
+
+        ]);
+    }
     #[Route('/search', name: 'app_movie_search', methods: ['GET'])]
     public function search(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -71,6 +81,7 @@ class HomeController extends AbstractController
             return $movie->getId();
         })->toArray();
 
+        $allUserMovies = $entityManager->getRepository(UserMovie::class)->findBy(['user' => $user]);
         $movies = [];
         $movie = $entityManager->getRepository(Movie::class)->findOneBy(['id' => $myMovies]);
         $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['movie' => $movie, 'user' => $user]);
@@ -100,6 +111,7 @@ class HomeController extends AbstractController
             'movieList' => $movieList,
             'userRating' => $userRating,
             'userMovie' => $userMovie,
+            'allUserMovies' => $allUserMovies,
 
         ]);
     }
