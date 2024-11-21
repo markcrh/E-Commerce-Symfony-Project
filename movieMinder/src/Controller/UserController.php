@@ -43,13 +43,16 @@ class UserController extends AbstractController
             return $movie->getId();
         })->toArray();
 
+        $url = $request->headers->get('referer');
+        $allUserMovies = $entityManager->getRepository(UserMovie::class)->findBy(['user' => $user]);
+
         $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['movie' => $movie, 'user' => $user]);
 
         $userRating = null;
-        if (!$userMovie == null){
+        if ($userMovie){
         $userRating = $userMovie->getRating();
         $rating = (int) $request->request->get('rating');
-        $this->movieRatingService->rateMovie($movie, $user, $rating);
+        /*$this->movieRatingService->rateMovie($movie, $user, $rating);*/
         $entityManager->flush();
         }
 
@@ -59,6 +62,8 @@ class UserController extends AbstractController
             'myMovies' => $myMovies,
             'userRating' => $userRating,
             'userMovie' => $userMovie,
+            'allUserMovies' => $allUserMovies,
+            'url' => $url,
         ]);
     }
 
@@ -66,6 +71,7 @@ class UserController extends AbstractController
     #[Route('/mymovies', name:'show_list', methods: ['GET'])]
     public function getList(Request $request, EntityManagerInterface $entityManager): Response
     {
+        /*remember to remove the block below*/
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
         $movies = $entityManager->getRepository(Movie::class)->findBy(['id' => $myMovies], null,);
@@ -74,8 +80,11 @@ class UserController extends AbstractController
             return $movie->getId();
         })->toArray();
 
+        $url = $request->headers->get('referer');
+
         $movie = $entityManager->getRepository(Movie::class)->findOneBy(['id' => $myMovies]);
         $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['movie' => $movie, 'user' => $user]);
+        $allUserMovies = $entityManager->getRepository(UserMovie::class)->findBy(['user' => $user]);
         $userRating = null;
         if (!$userMovie == null){
         $userRating = $userMovie->getRating();
@@ -89,7 +98,8 @@ class UserController extends AbstractController
             'watchedMovies' => $watchedMovies,
             'userRating' => $userRating,
             'userMovie' => $userMovie,
-
+            'allUserMovies' => $allUserMovies,
+            'url' => $url,
 
         ]);
     }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Movie;
+use App\Entity\User;
 use App\Entity\UserMovie;
 use App\Form\MovieType;
 use App\Service\MovieRatingService;
@@ -38,6 +39,8 @@ class MovieController extends AbstractController
 
         $userRating = null;
         $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['user' => $user, 'movie' => $movieList]);
+        $allUserMovies = $entityManager->getRepository(UserMovie::class)->findAll();
+
 
         return $this->render('movie/index.html.twig', [
             'movies' => $movies = $entityManager->getRepository(Movie::class)->findAll(),
@@ -45,11 +48,10 @@ class MovieController extends AbstractController
             'userRating' => $userRating ? $userRating['rating'] : null,
             'movieList' => $movieList,
             'userMovie' => $userMovie,
+            'allUserMovies' => $allUserMovies,
             'url' => $url,
         ]);
     }
-
-
 
     #[Route('/add/{id}', name: 'add_movie_user', methods: ['GET', 'POST'])]
     public function addMovieUser(int $id, Request $request, EntityManagerInterface $entityManager): Response
@@ -57,6 +59,7 @@ class MovieController extends AbstractController
         $url = $request->headers->get('referer');
         $user = $this->getUser();
         $myMovies = $user->getMoviesId();
+        $movie = $entityManager->getRepository(Movie::class)->find($id);
         if (!in_array($id, $myMovies)) {
             $myMovies[] = $id;
             $user->setMoviesId($myMovies);
@@ -64,6 +67,7 @@ class MovieController extends AbstractController
         } else {
             unset($myMovies[array_search($id, $myMovies)]);
             $user->setMoviesId($myMovies);
+            $movie->setRating(0);
             $entityManager->flush();
         }
         return $this->redirect($url);
@@ -153,7 +157,7 @@ class MovieController extends AbstractController
 
 
     #[Route('/{id}/rate', name: 'app_movie_rate', methods: ['POST'])]
-    public function rateMovie(int $id, Request $request, EntityManagerInterface $entityManager)
+    public function rateMovie(int $id, Request $request, EntityManagerInterface $entityManager) :Response
     {
         $url = $request->headers->get('referer');
         $user = $this->getUser();

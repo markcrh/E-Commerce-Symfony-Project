@@ -197,6 +197,7 @@ class Movie
     {
         if ($this->users->removeElement($user)) {
             $user->removeWatchedMovie($this);
+            $this->setRating(0);
         }
 
         return $this;
