@@ -33,16 +33,16 @@
                                         <h3 class="mt-2 text-xl">Rating total:{{movie.rating}}</h3>
                                     </div>
 
-                                    {% if userMovie is not null %}
-                                        {% if userMovie.movie.id == movie.id%}
-                                            <h3 class="mt-4 text-lg">Rate this movie:</h3>
-                                            <form action="{{ path('app_movie_rate', {'id': movie.id}) }}" method="POST" class="mt-2">
-                                                <label for="rating" class="mr-2">Your rating (1-10):</label>
-                                                <input type="number" id="rating" name="rating" min="1" max="10" required class="p-2 border border-gray-300 rounded-md text-black bg-white" value="{{ userRating is not null ? userRating : '' }}">
-                                                <button type="submit" class="ml-2 bg-orange-500 text-black p-2 rounded-md">Submit Rating</button>
-                                            </form>
-                                        {% endif %}
-                                        {% endif %}
+                                        {% for element in allUserMovies %}
+                                            {% if (movie.id == element.movie.id and url == "http://127.0.0.1:8000/user/mymovies") %}
+                                                <h3 class="mt-4 text-lg">Rate this movie:</h3>
+                                                <form action="{{ path('app_movie_rate', {'id': movie.id}) }}" method="POST" class="mt-2">
+                                                    <label for="rating" class="mr-2">Your rating (1-10):</label>
+                                                    <input type="number" id="rating" name="rating" min="1" max="10" required class="p-2 border border-gray-300 rounded-md text-black bg-white" value="{{ userRating is not null ? userRating : '' }}">
+                                                    <button type="submit" class="ml-2 bg-orange-500 text-black p-2 rounded-md">Submit Rating</button>
+                                                </form>
+                                            {% endif %}
+                                        {% endfor %}
 
                                     <div class="mb-2 pb-1 pt-1 text-center">
                                         <a href="{{ path('app_register') }}">

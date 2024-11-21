@@ -29,6 +29,7 @@ class HomeController extends AbstractController
             $movies[] = $movie;
         }
         $userMovie = $entityManager->getRepository(UserMovie::class)->findOneBy(['movie' => $movie, 'user' => $user]);
+        $allUserMovies = $entityManager->getRepository(UserMovie::class)->findAll();
         $userRating = null;
         if ($user) {
             $query = $entityManager->createQuery(
@@ -45,6 +46,7 @@ class HomeController extends AbstractController
             'movies' => $entityManager->getRepository(Movie::class)->findBy([], null, 6),
             'userRating' => $userRating ? $userRating['rating'] : null,
             'userMovie' => $userMovie,
+            'allUserMovies' => $allUserMovies,
 
         ]);
     }
@@ -56,7 +58,6 @@ class HomeController extends AbstractController
 
         ]);
     }
-
 
     #[Route('/search', name: 'app_movie_search', methods: ['GET'])]
     public function search(Request $request, EntityManagerInterface $entityManager): Response
